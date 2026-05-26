@@ -23,7 +23,7 @@ export default function Hero() {
 
       {/* Curved Section Separators with Glowing/Lightning border */}
       <div className="absolute border-b-4 sm:border-b-6 md:border-b-8 mb-1 sm:mb-2 border-black bottom-0 left-0 right-0 h-40 sm:h-48 md:h-52 lg:h-40 xl:h-32 bg-purple-900/40 rounded-t-[100%] blur-md z-0 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-40 sm:h-48 md:h-52 lg:h-40 xl:h-32 bg-zinc-950 rounded-t-[100%] z-0 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 sm:h-48 md:h-52 lg:h-40 xl:h-32 bg-black rounded-t-[100%] z-0 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full text-center pb-12">
         {/* Headline */}

@@ -168,7 +168,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="bg-black w-full text-white pt-20 md:pt-32 pb-16 overflow-visible border-t border-zinc-900">
+    <section id="projects" className="bg-black w-full text-white pt-20 md:pt-32 pb-16 overflow-visible">
       <div className="pt-5 px-4 md:px-10 max-w-7xl mx-auto">
         
         {/* Section Header */}

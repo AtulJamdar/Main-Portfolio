@@ -1,177 +1,206 @@
 "use client";
 
-import React from "react";
-import dynamic from "next/dynamic";
-import { Mail, Globe, MapPin, Sparkles, BookOpen } from "lucide-react";
-import SectionReveal from "../ui/SectionReveal";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-// Dynamically import IconCloud with SSR disabled to prevent server-side hydration mismatches from canvas element random IDs
-const IconCloud = dynamic(
-  () => import("@/registry/magicui/icon-cloud").then((mod) => mod.IconCloud),
-  { ssr: false }
-);
-
-const slugs = [
-  "typescript",
-  "javascript",
-  "react",
-  "html5",
-  "css3",
-  "nodedotjs",
-  "express",
-  "nextdotjs",
-  "prisma",
-  "amazonaws",
-  "postgresql",
-  "firebase",
-  "nginx",
-  "vercel",
-  "docker",
-  "git",
-  "github",
-  "figma",
+const ROW_1 = [
+  { name: "HTML", slug: "html5", color: "E34F26" },
+  { name: "CSS", slug: "css3", color: "1572B6" },
+  { name: "JavaScript", slug: "javascript", color: "F7DF1E" },
+  { name: "TypeScript", slug: "typescript", color: "3178C6" },
+  { name: "ReactJS", slug: "react", color: "61DAFB" },
+  { name: "NextJS", slug: "nextdotjs", color: "FFFFFF" },
+  { name: "Tailwind CSS", slug: "tailwindcss", color: "06B6D4" },
 ];
 
-const SKILL_ITEMS = [
-  {
-    title: "Project Strategy",
-    desc: "I work closely with clients to define clear goals and develop a strategic engineering roadmap for each product."
-  },
-  {
-    title: "Design & UX",
-    desc: "I create intuitive, aesthetic, and responsive web designs focused on premium user-centered experiences."
-  },
-  {
-    title: "Custom Development",
-    desc: "I write clean, efficient, highly type-safe React/Next.js code to build custom MERN software solutions."
-  },
-  {
-    title: "API & Integrations",
-    desc: "I integrate third-party services, Stripe payment checkouts, and AI models (OpenAI) seamlessly."
-  }
+const ROW_2 = [
+  { name: "Framer Motion", slug: "framermotion", color: "F50057" },
+  { name: "Shadcn", slug: "shadcnui", color: "FFFFFF" },
+  { name: "NodeJS", slug: "nodedotjs", color: "339933" },
+  { name: "ExpressJS", slug: "express", color: "FFFFFF" },
+  { name: "MongoDB", slug: "mongodb", color: "47A248" },
+  { name: "SQL", slug: "postgresql", color: "4169E1" },
+  { name: "GitHub", slug: "github", color: "FFFFFF" },
+  { name: "Vercel", slug: "vercel", color: "FFFFFF" },
 ];
+
+const ROW_3 = [
+  { name: "Postman", slug: "postman", color: "FF6C37" },
+  { name: "Java", slug: "java", color: "FFFFFF" },
+  { name: "npm", slug: "npm", color: "CB3837" },
+  { name: "Figma", slug: "figma", color: "F24E1E" },
+  { name: "Firebase", slug: "firebase", color: "FFCA28" },
+  { name: "REST API", slug: "postman", color: "FF6C37" },
+  { name: "Python", slug: "python", color: "3776AB" },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+    },
+  },
+};
+
+const pillVariants = {
+  hidden: { opacity: 0, scale: 0.7, y: 15 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 120,
+      damping: 12,
+    },
+  },
+};
 
 export default function TechStack() {
-  const images = slugs.map(
-    (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
-  );
+  const containerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  
+  // Track scroll progress of the header block itself
+  const { scrollYProgress } = useScroll({
+    target: headerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Map progress to pathLength to draw the whole triangle sequentially from the very start
+  const pathLength = useTransform(scrollYProgress, [0.3, 0.7], [0, 1]);
 
   return (
-    <section id="process" className="py-24 relative overflow-hidden bg-zinc-950/20 border-b border-zinc-900">
-      {/* Background soft ambient flares */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-brand-primary/5 blur-[100px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+    <section
+      ref={containerRef}
+      id="techstack"
+      className="min-h-screen w-full pt-24 sm:pt-40 bg-black text-white py-12 sm:py-20 relative overflow-hidden"
+    >
+      <div className="container mx-auto px-4 relative z-10">
         
-        {/* Section Header */}
-        <SectionReveal className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-xs font-bold font-mono tracking-widest text-brand-primary uppercase mb-3">
-            VERIFIED STACK & DEVELOPMENT PROCESS
-          </h2>
-          <p className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Code Meets Creativity
-          </p>
-        </SectionReveal>
-
-        {/* Bento Grid Summary Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mx-auto w-full">
-          
-          {/* Card 1: Tech Enthusiast (Icon Cloud sphere) */}
-          <SectionReveal className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm shadow-md transition-all hover:shadow-lg hover:border-zinc-700 md:col-span-4 md:row-span-2 min-h-[420px] flex flex-col justify-between">
-            <div className="h-full p-6 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-1.5 text-xs text-brand-primary font-mono uppercase mb-2">
-                  <Sparkles className="w-3 h-3" />
-                  Tech Stack
-                </div>
-                <h3 className="font-bold text-zinc-100 text-lg">Always excited to build cool stuff with the latest tech.</h3>
-              </div>
-              
-              <div className="my-4 flex-grow relative flex items-center justify-center min-h-[220px]">
-                <div className="relative flex size-full items-center justify-center overflow-hidden">
-                  <IconCloud images={images} />
-                </div>
-              </div>
-              
-              <div className="text-[10px] text-zinc-500 font-mono">
-                &gt; Drag to rotate 3D sphere
-              </div>
+        {/* Header Block with Animated Wireframe Triangle */}
+        <div ref={headerRef} className="flex flex-col items-center justify-center mb-10 sm:mb-16">
+          <div className="relative w-full flex flex-col items-center justify-center mb-5">
+            
+            {/* Animated Geometry Triangle Backdrop */}
+            <div className="absolute w-40 h-40 sm:w-64 sm:h-64" style={{ zIndex: 0 }}>
+              <svg viewBox="0 0 100 100" className="w-full h-full opacity-30 sm:opacity-40">
+                <motion.path
+                  d="M 50,10 L 10,90 L 90,90 Z"
+                  stroke="#a855f7" // Purple-500 matching theme
+                  strokeWidth="1.5"
+                  fill="none"
+                  style={{ pathLength }}
+                />
+              </svg>
             </div>
-          </SectionReveal>
 
-          {/* Card 2: Let's work together */}
-          <SectionReveal className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm shadow-md transition-all hover:shadow-lg hover:border-zinc-700 md:col-span-4 h-64 flex flex-col justify-between">
-            <div className="h-full p-6 flex flex-col justify-between">
-              <div>
-                <h3 className="font-bold text-zinc-150 text-lg">Let's work together</h3>
-                <p className="text-xs text-zinc-400 mt-1">on your next web application</p>
-              </div>
-              
-              <div className="flex justify-center items-center my-2">
-                <div className="h-16 w-16 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary flex items-center justify-center shadow-lg animate-pulse">
-                  <span className="text-white font-extrabold text-xl tracking-tight">JA</span>
-                </div>
-              </div>
-              
-              <div>
-                <a 
-                  href="mailto:hello.atuljamdar@gmail.com" 
-                  className="inline-flex items-center justify-center rounded-lg bg-zinc-800 border border-white/5 px-4 py-2.5 text-xs font-semibold text-zinc-200 hover:bg-zinc-750 transition-all duration-300 w-full"
-                >
-                  <Mail className="mr-2 h-3.5 w-3.5 text-zinc-400" />
-                  hello.atuljamdar@gmail.com
-                </a>
-              </div>
+            {/* Typography */}
+            <div className="relative pt-4 sm:pt-6 backdrop-blur-xs mt-24 sm:mt-32 z-10 text-center">
+              <p className="text-[10px] sm:text-xs uppercase tracking-widest text-zinc-500 font-mono mb-2">
+                Better than yesterday.
+              </p>
+              <motion.h2 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-3xl sm:text-5xl font-bold tracking-tight"
+              >
+                My Tech Stack
+              </motion.h2>
             </div>
-          </SectionReveal>
 
-          {/* Card 3: Remote */}
-          <SectionReveal className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm shadow-md transition-all hover:shadow-lg hover:border-zinc-700 md:col-span-4 h-64 flex flex-col justify-between">
-            <div className="h-full p-6 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-1.5 text-xs text-zinc-400 font-mono uppercase mb-2">
-                  <Globe className="w-3 h-3" />
-                  Work Zone
-                </div>
-                <h3 className="font-bold text-zinc-150 text-lg">Remote // India</h3>
-                <p className="text-xs text-zinc-450 mt-1 leading-relaxed">
-                  I'm extremely flexible with international time zone communications.
-                </p>
-              </div>
-              
-              <div className="flex items-center gap-2 p-3 bg-black/30 border border-white/5 rounded-xl font-mono text-[9px] text-zinc-450 mt-4">
-                <MapPin className="w-3.5 h-3.5 text-brand-secondary flex-shrink-0" />
-                <span>GMT +5:30 // Berhampur (Berhampur dispatch)</span>
-              </div>
-            </div>
-          </SectionReveal>
-
-          {/* Card 4: Behind the Scenes (Skills Carousel) */}
-          <SectionReveal className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm shadow-md transition-all hover:shadow-lg hover:border-zinc-700 md:col-span-8 flex flex-col justify-between">
-            <div className="h-full p-6 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-1.5 text-xs text-zinc-400 font-mono uppercase mb-2">
-                  <BookOpen className="w-3 h-3" />
-                  Methodology
-                </div>
-                <h3 className="font-bold text-zinc-150 text-lg">Currently crafting high-performance full-stack SaaS.</h3>
-              </div>
-              
-              <div className="mt-6 flex gap-3 overflow-x-auto pb-2 scrollbar-none">
-                {SKILL_ITEMS.map((item, idx) => (
-                  <div 
-                    key={idx} 
-                    className="h-36 bg-zinc-950/60 border border-white/5 rounded-xl p-4 w-40 flex-shrink-0 flex flex-col justify-between transition-colors hover:border-brand-primary/20"
-                  >
-                    <h4 className="text-xs font-bold text-zinc-100">{item.title}</h4>
-                    <p className="text-[10px] text-zinc-400 leading-normal mb-1">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </SectionReveal>
-
+          </div>
         </div>
+
+        {/* Dynamic Pills Row Layout */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mt-6 sm:mt-10 flex flex-col gap-2 sm:gap-3 items-center justify-center"
+        >
+          {/* Row 1 */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3 w-full sm:w-auto justify-center">
+            {ROW_1.map((tech) => (
+              <motion.div
+                key={tech.name}
+                variants={pillVariants}
+                whileHover={{ scale: 1.05, borderColor: "#a855f7", backgroundColor: "rgba(147, 51, 234, 0.1)" }}
+                className="rounded-full py-1.5 sm:py-2 px-3 sm:px-4 flex items-center justify-center gap-1.5 sm:gap-2 border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm transition-colors duration-300 cursor-default shadow-md"
+              >
+                <span className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
+                  <img
+                    alt={tech.name}
+                    loading="lazy"
+                    width="20"
+                    height="20"
+                    className="object-contain w-full h-full filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+                    src={`https://cdn.simpleicons.org/${tech.slug}/${tech.color}`}
+                  />
+                </span>
+                <span className="text-xs sm:text-sm font-medium text-zinc-200">
+                  {tech.name}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Row 2 */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3 w-full sm:w-auto justify-center">
+            {ROW_2.map((tech) => (
+              <motion.div
+                key={tech.name}
+                variants={pillVariants}
+                whileHover={{ scale: 1.05, borderColor: "#a855f7", backgroundColor: "rgba(147, 51, 234, 0.1)" }}
+                className="rounded-full py-1.5 sm:py-2 px-3 sm:px-4 flex items-center justify-center gap-1.5 sm:gap-2 border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm transition-colors duration-300 cursor-default shadow-md"
+              >
+                <span className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
+                  <img
+                    alt={tech.name}
+                    loading="lazy"
+                    width="20"
+                    height="20"
+                    className="object-contain w-full h-full filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+                    src={`https://cdn.simpleicons.org/${tech.slug}/${tech.color}`}
+                  />
+                </span>
+                <span className="text-xs sm:text-sm font-medium text-zinc-200">
+                  {tech.name}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Row 3 */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3 w-full sm:w-auto justify-center">
+            {ROW_3.map((tech) => (
+              <motion.div
+                key={tech.name}
+                variants={pillVariants}
+                whileHover={{ scale: 1.05, borderColor: "#a855f7", backgroundColor: "rgba(147, 51, 234, 0.1)" }}
+                className="rounded-full py-1.5 sm:py-2 px-3 sm:px-4 flex items-center justify-center gap-1.5 sm:gap-2 border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm transition-colors duration-300 cursor-default shadow-md"
+              >
+                <span className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
+                  <img
+                    alt={tech.name}
+                    loading="lazy"
+                    width="20"
+                    height="20"
+                    className="object-contain w-full h-full filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+                    src={`https://cdn.simpleicons.org/${tech.slug}/${tech.color}`}
+                  />
+                </span>
+                <span className="text-xs sm:text-sm font-medium text-zinc-200">
+                  {tech.name}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
       </div>
     </section>

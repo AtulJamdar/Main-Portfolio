@@ -1,111 +1,85 @@
 "use client";
 
 import React from "react";
-import { Mail, ArrowUp } from "lucide-react";
-import MagneticButton from "../ui/MagneticButton";
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
-    <footer className="w-full bg-black text-white py-12 sm:py-20 border-t border-zinc-900">
-      <div className="mx-auto px-6 max-w-7xl">
-        
-        {/* Upper Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pb-12 sm:pb-16 items-start">
-          
-          {/* Brand & Hook */}
-          <div className="col-span-1 md:col-span-6 space-y-4">
-            <a href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-              <span className="text-white font-mono bg-purple-950/40 px-2 py-0.5 border border-purple-800/30 rounded text-base">JA</span>
-              <span className="text-zinc-200">Atul Jamdar</span>
-            </a>
-            <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-md">
-              I'm open to freelance projects, full-time roles, or collaborative ideas. Connect and build something meaningful together.
+    <footer className="w-full bg-black text-white py-10 sm:py-16 border-t border-zinc-900">
+      <div className="mx-auto px-4 max-w-7xl">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-20 mb-8 sm:mb-12">
+          {/* Column 1 */}
+          <div className="col-span-1">
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Atul Jamdar</h2>
+            <p className="text-gray-400 text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed">
+              Building web solutions where clean design and powerful functionality work in harmony.
             </p>
-          </div>
-
-          {/* Contact Methods */}
-          <div className="col-span-1 md:col-span-6 flex flex-col md:items-end space-y-3.5">
-            <span className="text-xs font-bold font-mono tracking-widest text-zinc-500 uppercase">
-              Get in Touch
-            </span>
-            
-            {/* Email link */}
-            <a 
-              href="mailto:hello.atuljamdar@gmail.com" 
-              className="text-zinc-300 hover:text-purple-400 transition-colors flex items-center text-sm sm:text-lg font-medium group"
-            >
-              <Mail className="h-4.5 w-4.5 sm:h-5 sm:w-5 mr-2 text-purple-400 group-hover:scale-110 transition-transform" />
-              <span>hello.atuljamdar@gmail.com</span>
-            </a>
-
-            {/* Social Icons row */}
-            <div className="flex gap-4 pt-2">
-              {[
-                {
-                  icon: (
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-                      <path d="M9 18c-4.51 2-5-2-7-2" />
-                    </svg>
-                  ),
-                  href: "https://github.com/AtulJamdar",
-                  label: "GitHub"
-                },
-                {
-                  icon: (
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                      <rect width="4" height="12" x="2" y="9" />
-                      <circle cx="4" cy="4" r="2" />
-                    </svg>
-                  ),
-                  href: "https://www.linkedin.com/in/connectatuljamdar/",
-                  label: "LinkedIn"
-                },
-                // {
-                //   icon: (
-                //     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                //       <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                //     </svg>
-                //   ),
-                //   href: "https://x.com",
-                //   label: "Twitter"
-                // }
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 border border-zinc-900 bg-zinc-950/40 hover:bg-zinc-900 rounded-full text-zinc-400 hover:text-white hover:border-zinc-800 transition-all duration-200"
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </a>
-              ))}
+            <div className="flex space-x-3 sm:space-x-4">
+              <a
+                className="text-gray-400 hover:text-white transition-colors"
+                href="https://www.linkedin.com/in/connectatuljamdar"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" className="text-base sm:text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path>
+                </svg>
+                <span className="sr-only">LinkedIn</span>
+              </a>
+              <a
+                className="text-gray-400 hover:text-white transition-colors"
+                href="https://github.com/AtulJamdar"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 496 512" className="text-base sm:text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
+                </svg>
+                <span className="sr-only">GitHub</span>
+              </a>
             </div>
           </div>
 
+          {/* Column 2 */}
+          <div className="col-span-1 my-5 md:my-0 flex flex-row justify-between items-start gap-6 sm:gap-8">
+            <div>
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">The Website</h3>
+              <nav className="flex flex-col space-y-1 sm:space-y-2">
+                <a className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base" href="/">Home</a>
+                <a className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base" href="/projects">Projects</a>
+                <a className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base" href="/about">About</a>
+                <a className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base" href="/experience">Experience</a>
+                <a className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base" href="/contact">Contact</a>
+              </nav>
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Projects</h3>
+              <nav className="flex flex-col space-y-1 sm:space-y-2">
+                <a href="https://tasveer-delta.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base">Tasveer</a>
+                <a href="https://syncflow-xnch.onrender.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base">SyncFlow</a>
+                <a href="https://github.com/AtulJamdar/BuildWise" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base">BuildWise</a>
+                <a href="https://github.com/AtulJamdar/Web-Customizer" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base">Web Customizer</a>
+              </nav>
+            </div>
+          </div>
+
+          {/* Column 3 */}
+          <div className="col-span-1">
+            <p className="text-sm sm:text-base text-gray-400 mb-3 sm:mb-4 leading-relaxed">
+              I'm open to freelance projects, full-time roles, or collaborative ideas. Connect and build something meaningful together.
+            </p>
+            <a className="text-purple-400 hover:text-purple-300 transition-colors flex items-center text-sm sm:text-base font-semibold" href="mailto:hello.atuljamdar@gmail.com">
+              <svg xmlns="http://www.w3.org/2050/svg" className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+              </svg>
+              <span>hello.atuljamdar@gmail.com</span>
+            </a>
+          </div>
         </div>
 
-        {/* Footer base copyright row */}
-        <div className="pt-6 sm:pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-zinc-500 text-xs sm:text-sm">
-          <p>
-            Copyright © {new Date().getFullYear()} Atul Jamdar. All rights reserved.
-          </p>
-
-          <MagneticButton
-            onClick={scrollToTop}
-            className="p-2 border border-zinc-900 bg-zinc-950/40 hover:bg-zinc-900 rounded-full text-zinc-400 hover:text-white hover:border-zinc-800 transition-all duration-200 shadow-md shadow-black"
-          >
-            <ArrowUp className="w-4 h-4" />
-          </MagneticButton>
+        <div className="pt-6 sm:pt-8 border-t border-zinc-900 text-center text-gray-500 text-xs sm:text-sm">
+          <p>Copyright © {new Date().getFullYear()} Atul Jamdar. All rights reserved.</p>
         </div>
-
       </div>
     </footer>
   );

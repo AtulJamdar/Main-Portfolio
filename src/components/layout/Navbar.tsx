@@ -6,11 +6,11 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import MagneticButton from "../ui/MagneticButton";
 
 const NAV_ITEMS = [
-  { label: "Projects", href: "#projects" },
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "About", href: "#about" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Home", href: "/" },
+  { label: "Projects", href: "/projects" },
+  { label: "About", href: "/about" },
+  { label: "Experience", href: "/experience" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -68,7 +68,7 @@ export default function Navbar() {
 
           {/* Desktop CTA Button */}
           <div className="hidden md:block">
-            <a href="#contact">
+            <a href="/contact">
               <MagneticButton className="px-5 py-2 text-xs font-semibold tracking-wider text-white border border-white/10 rounded-full bg-white/5 hover:bg-white/10 transition-colors duration-300 flex items-center gap-1.5 overflow-hidden">
                 LET'S TALK
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -120,7 +120,7 @@ export default function Navbar() {
               className="flex flex-col gap-6"
             >
               <a
-                href="#contact"
+                href="/contact"
                 onClick={() => setIsOpen(false)}
                 className="w-full text-center py-4 bg-brand-primary hover:bg-indigo-600 transition-colors text-white font-medium rounded-xl flex items-center justify-center gap-2"
               >
