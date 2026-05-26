@@ -61,16 +61,16 @@ export default function Services() {
           </span>
         </motion.div>
 
-        {/* Horizontal Slider Layout */}
-        <div className="overflow-x-auto pb-8 snap-x snap-mandatory flex gap-4 sm:gap-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {/* Responsive Grid/Slider Layout */}
+        <div className="flex overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {SERVICES.map((srv, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="snap-center min-w-[80vw] sm:min-w-[320px] md:min-w-[345px] h-[360px] sm:h-[400px] p-6 sm:p-8 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl sm:rounded-3xl shadow-lg flex flex-col justify-between border-transparent hover:border-purple-500/20 hover:shadow-purple-500/5 transition-all duration-300 group flex-shrink-0"
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              className="snap-center min-w-[80vw] md:min-w-0 h-[360px] sm:h-[380px] p-6 sm:p-8 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl sm:rounded-3xl shadow-lg flex flex-col justify-between hover:border-purple-500/20 hover:shadow-purple-500/5 transition-all duration-300 group flex-shrink-0 md:flex-shrink"
             >
               <div>
                 {/* Emoji Icon */}
@@ -96,7 +96,7 @@ export default function Services() {
 
               {/* Bottom CTA Button */}
               <div className="mt-3 sm:mt-4">
-                <button className="text-purple-400 hover:text-purple-300 font-semibold text-xs sm:text-sm transition-colors flex items-center gap-1.5 group/btn">
+                <button className="text-purple-400 hover:text-purple-300 font-semibold text-xs sm:text-sm transition-colors flex items-center gap-1.5 group/btn cursor-pointer">
                   Learn more 
                   <span className="group-hover/btn:translate-x-1.5 transition-transform duration-200">→</span>
                 </button>
