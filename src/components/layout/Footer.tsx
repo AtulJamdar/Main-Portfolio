@@ -52,7 +52,7 @@ export default function Footer() {
                       <path d="M9 18c-4.51 2-5-2-7-2" />
                     </svg>
                   ),
-                  href: "https://github.com",
+                  href: "https://github.com/AtulJamdar",
                   label: "GitHub"
                 },
                 {
@@ -63,7 +63,7 @@ export default function Footer() {
                       <circle cx="4" cy="4" r="2" />
                     </svg>
                   ),
-                  href: "https://linkedin.com",
+                  href: "https://www.linkedin.com/in/connectatuljamdar/",
                   label: "LinkedIn"
                 },
                 {

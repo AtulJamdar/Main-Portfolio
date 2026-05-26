@@ -138,7 +138,7 @@ export default function Contact() {
                 {[
                   {
                     name: "GitHub",
-                    href: "https://github.com",
+                    href: "https://github.com/AtulJamdar",
                     icon: (
                       <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
@@ -148,7 +148,7 @@ export default function Contact() {
                   },
                   {
                     name: "LinkedIn",
-                    href: "https://linkedin.com",
+                    href: "https://www.linkedin.com/in/connectatuljamdar",
                     icon: (
                       <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -157,15 +157,15 @@ export default function Contact() {
                       </svg>
                     )
                   },
-                  {
-                    name: "Twitter / X",
-                    href: "https://x.com",
-                    icon: (
-                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                      </svg>
-                    )
-                  }
+                  // {
+                  //   name: "Twitter / X",
+                  //   href: "https://x.com",
+                  //   icon: (
+                  //     <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  //       <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                  //     </svg>
+                  //   )
+                  // }
                 ].map((social) => (
                   <a
                     key={social.name}
@@ -216,7 +216,7 @@ export default function Contact() {
                   {/* Name field */}
                   <div>
                     <label htmlFor="name" className="block text-[10px] font-bold font-mono text-zinc-400 uppercase tracking-widest mb-2">
-                      Full Name
+                      Name
                     </label>
                     <input
                       type="text"
@@ -233,7 +233,7 @@ export default function Contact() {
                   {/* Email field */}
                   <div>
                     <label htmlFor="email" className="block text-[10px] font-bold font-mono text-zinc-400 uppercase tracking-widest mb-2">
-                      Corporate Email
+                      Email
                     </label>
                     <input
                       type="email"
@@ -250,7 +250,7 @@ export default function Contact() {
                   {/* Project details */}
                   <div>
                     <label htmlFor="details" className="block text-[10px] font-bold font-mono text-zinc-400 uppercase tracking-widest mb-2">
-                      Project Specifications & Scope
+                      Message
                     </label>
                     <textarea
                       id="details"
@@ -259,13 +259,13 @@ export default function Contact() {
                       rows={4}
                       value={formData.details}
                       onChange={handleChange}
-                      placeholder="Describe the SaaS platform, AI integration, or frontend system you want to construct. Include timeline, requirements, and tech preferences..."
+                      placeholder="Tell me about your project....."
                       className="w-full px-4 py-3 bg-zinc-950/60 border border-white/5 rounded-xl text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary/20 transition-all leading-relaxed font-mono resize-none"
                     />
                   </div>
 
                   {/* Budget Options Selector */}
-                  <div>
+                  {/* <div>
                     <label className="block text-[10px] font-bold font-mono text-zinc-400 uppercase tracking-widest mb-3">
                       Est. Capital Budget
                     </label>
@@ -285,7 +285,7 @@ export default function Contact() {
                         </button>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* Error Notification */}
                   {status === "error" && (
@@ -302,7 +302,7 @@ export default function Contact() {
                       disabled={status === "loading"}
                       className="w-full py-4 text-sm font-bold text-white bg-brand-primary hover:bg-indigo-600 rounded-xl transition-all duration-300 shadow-lg shadow-indigo-500/15 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50"
                     >
-                      {status === "loading" ? "TRANSMITTING SPEC DATA..." : "TRANSMIT PROPOSAL SPECIFICATION"}
+                      {status === "loading" ? "TRANSMITTING SPEC DATA..." : "Send Message"}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </MagneticButton>
                   </div>
