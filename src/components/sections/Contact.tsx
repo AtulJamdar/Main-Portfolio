@@ -187,7 +187,7 @@ export default function Contact() {
             <CardGlass delay={0.1} className="relative overflow-hidden">
               
               <div className="flex justify-between items-center pb-4 border-b border-white/5 mb-6">
-                <span className="text-xs font-bold font-mono text-zinc-400">PROPOSAL_BUILDER // CONFIG</span>
+                <span className="text-xs font-bold font-mono text-zinc-400">Send Message</span>
                 <span className="text-[10px] font-bold text-zinc-500 font-mono">ENCRYPTED SEND</span>
               </div>
 
