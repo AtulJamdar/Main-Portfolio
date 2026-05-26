@@ -20,6 +20,7 @@ export default function Home() {
       {/* Main minimal sections overview flow */}
       <main className="relative z-10 flex-1 flex flex-col">
         <Hero />
+        <About />
         <Projects />
         <TechStack />
         <Experience />
