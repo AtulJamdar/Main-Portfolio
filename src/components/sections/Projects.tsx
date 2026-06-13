@@ -5,41 +5,7 @@ import { ArrowUpRight, Sparkles, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const PROJECTS = [
-  {
-  id: "mkphotography",
-
-  title: "MK Photography",
-
-  subtitle: "Professional Photography Studio & Passport Photo Services",
-
-  description:
-    "A high-converting local photography business platform designed to increase Google visibility, generate WhatsApp inquiries, and transform local search traffic into real customer bookings through a fast, mobile-first experience.",
-
-  bullets: [
-    "Mobile-first photography experience optimized for local Pune customers",
-    "Integrated WhatsApp inquiry system focused on faster lead conversion",
-    "Trust-driven UI showcasing reviews, portfolio work, and service credibility",
-    "Local SEO architecture targeting Bibwewadi and Pune photography searches"
-  ],
-
-  stack: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Tailwind CSS",
-    "Framer Motion"
-  ],
-
-  liveUrl: "https://mk-photography-orcin.vercel.app/",
-
-  gradientClass: "from-zinc-950 via-neutral-900 to-stone-950",
-
-  themeColor: "text-amber-400",
-
-  bulletColor: "text-amber-500",
-
-  imagePath: "/assets/mk-photography.png"
-},
+  
   {
   id: "mkphotography",
 
