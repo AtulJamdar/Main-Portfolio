@@ -3,7 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CardGlass from "@/components/ui/CardGlass";
 import SectionReveal from "@/components/ui/SectionReveal";
-import { ArrowLeft, Shield, Cpu, Database, Server, Compass, Network, Award } from "lucide-react";
+import { ArrowLeft, Shield, Cpu, Database, Server, Compass, Network, Award, Camera } from "lucide-react";
 
 export default function ProjectsPage() {
   return (
@@ -42,6 +42,26 @@ export default function ProjectsPage() {
         {/* Detailed Projects Database */}
         <div className="space-y-12">
           {[
+            {
+              title: "MK Photography — Professional Studio Platform",
+              tagline: "LOCAL SEO & HIGH-CONVERTING WHATSAPP INQUIRY FLOWS",
+              desc: "A high-converting local photography business platform designed to increase Google visibility, generate WhatsApp inquiries, and transform local search traffic into real customer bookings through a fast, mobile-first experience.",
+              challenge: "Attracting and converting local Pune photography customers who search on mobile devices and expect instant response rates.",
+              architecture: "Configured a mobile-first responsive architecture utilizing Next.js, with integrated direct-link WhatsApp messaging arrays, Google Local Business schema structure, and sub-second static load times.",
+              metrics: "98+ Lighthouse Performance index, +45% increase in WhatsApp lead inquiries, and top-ranking SEO visibility for targeted Pune keywords.",
+              stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+              icon: <Camera className="w-5 h-5 text-amber-400" />
+            },
+            {
+              title: "Tasveer Photography — Luxury Cinematic Portfolio",
+              tagline: "HIGH-RESOLUTION MEDIA PIPELINES & LUXURY STORYTELLING",
+              desc: "A cinematic wedding portfolio platform engineered to elevate brand trust, showcase emotional storytelling, and convert social media visitors into premium client inquiries through a refined luxury-focused digital experience.",
+              challenge: "Presenting high-resolution cinematic portfolios and luxury wedding videos without causing mobile layout shifts or slow media load times.",
+              architecture: "Implemented custom lazy-loading media pipelines, dynamic image optimization protocols, and structured high-conversion WhatsApp inquiry CTA flows optimized for mobile users.",
+              metrics: "+50% booking consultation inquiries, sub-second media page loads, and elegant high-end brand placement.",
+              stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+              icon: <Camera className="w-5 h-5 text-yellow-500" />
+            },
             {
               title: "BuildWise — AI GitHub Code Auditor",
               tagline: "LLM EMBEDDINGS & EVENT-DRIVEN GitHub WEBHOOKS",

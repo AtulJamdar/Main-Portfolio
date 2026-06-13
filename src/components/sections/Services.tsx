@@ -2,43 +2,51 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  AnimatedCpu,
+  AnimatedRocket,
+  AnimatedBrainCircuit,
+  AnimatedServer,
+  AnimatedChartColumn,
+  AnimatedWorkflow
+} from "@/components/ui/AnimatedIcons";
 
 const SERVICES = [
   {
     title: "Full-Stack Development",
     tagline: "NEXT.JS & SECURE BACKENDS",
     description: "Engineering robust, end-to-end web applications. I construct modular controllers, secure databases (PostgreSQL/SQL), and type-safe systems that scale.",
-    emoji: "💻"
+    icon: <AnimatedCpu className="w-10 h-10 text-purple-400" />
   },
   {
     title: "SaaS Product Development",
     tagline: "PAYMENTS & SUBSCRIPTION ENGINES",
     description: "Building complete SaaS web platforms from database schemas to client payment checkouts. I integrate Stripe webhooks, user account settings, and analytics metrics.",
-    emoji: "🚀"
+    icon: <AnimatedRocket className="w-10 h-10 text-purple-400" />
   },
   {
     title: "AI Integration Engineering",
     tagline: "LLM EMBEDDINGS & RAG SEARCH",
     description: "Incorporating custom AI and Large Language Model capabilities. Scoping document ingestion audits, vector database indexes (Pinecone), and semantic search RAG systems.",
-    emoji: "🧠"
+    icon: <AnimatedBrainCircuit className="w-10 h-10 text-purple-400" />
   },
   {
     title: "API Development & Caching",
     tagline: "LATENCY-OPTIMIZED REDIS PILES",
     description: "Designing secure, latency-optimized REST and WebSocket interfaces. Configured Redis cache variables and asynchronous event queues to reduce server loads.",
-    emoji: "⚡"
+    icon: <AnimatedServer className="w-10 h-10 text-purple-400" />
   },
   {
     title: "Dashboard & Analytics Systems",
     tagline: "METRICS VISUALIZERS & HEAP AUDITS",
     description: "Constructing high-throughput data aggregation dashboards. Building responsive charts and custom data aggregation queries to visualize key user operations.",
-    emoji: "📊"
+    icon: <AnimatedChartColumn className="w-10 h-10 text-purple-400" />
   },
   {
     title: "Custom Automation Tools",
     tagline: "GITHUB ACTIONS & CRON UTILITIES",
     description: "Eliminate manual operational errors by constructing automated pipelines. Setup cron database scripts, Slack warning syncs, and GitHub Actions continuous builds.",
-    emoji: "🔄"
+    icon: <AnimatedWorkflow className="w-10 h-10 text-purple-400" />
   }
 ];
 
@@ -68,14 +76,15 @@ export default function Services() {
               key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover="hover"
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
               className="snap-center min-w-[80vw] md:min-w-0 h-[360px] sm:h-[380px] p-6 sm:p-8 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl sm:rounded-3xl shadow-lg flex flex-col justify-between hover:border-purple-500/20 hover:shadow-purple-500/5 transition-all duration-300 group flex-shrink-0 md:flex-shrink"
             >
               <div>
-                {/* Emoji Icon */}
-                <div className="text-4xl sm:text-5xl mb-4 sm:mb-6">
-                  {srv.emoji}
+                {/* Animated Icon Box */}
+                <div className="p-3 rounded-lg bg-zinc-950 border border-white/5 w-fit group-hover:border-purple-500/20 hover:bg-black transition-all duration-300 mb-4 sm:mb-6">
+                  {srv.icon}
                 </div>
 
                 {/* Service Tagline & Title */}

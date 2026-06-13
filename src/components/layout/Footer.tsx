@@ -54,6 +54,7 @@ export default function Footer() {
             <div>
               <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Projects</h3>
               <nav className="flex flex-col space-y-1 sm:space-y-2">
+                <a href="https://mk-photography-orcin.vercel.app" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base">MK Photography</a>
                 <a href="https://tasveer-delta.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base">Tasveer</a>
                 <a href="https://syncflow-xnch.onrender.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base">SyncFlow</a>
                 <a href="https://github.com/AtulJamdar/BuildWise" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-xs sm:text-base">BuildWise</a>

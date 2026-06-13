@@ -1,8 +1,17 @@
 "use client";
 
 import React from "react";
-import { Calendar, MapPin, Code, Database, Users, Zap, ShieldCheck, Activity } from "lucide-react";
 import { motion } from "framer-motion";
+import {
+  AnimatedCalendar,
+  AnimatedMapPin,
+  AnimatedCode,
+  AnimatedDatabase,
+  AnimatedUsers,
+  AnimatedZap,
+  AnimatedShieldCheck,
+  AnimatedActivity
+} from "@/components/ui/AnimatedIcons";
 
 export default function Experience() {
   return (
@@ -29,6 +38,7 @@ export default function Experience() {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover="hover"
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="relative group"
@@ -54,11 +64,11 @@ export default function Experience() {
                 {/* Date / Location Info */}
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-gray-400 text-xs sm:text-sm">
                   <div className="flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4 text-purple-400" />
+                    <AnimatedCalendar className="w-4 h-4 text-purple-400" />
                     <span>June 2024 — December 2024</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <MapPin className="w-4 h-4 text-purple-400" />
+                    <AnimatedMapPin className="w-4 h-4 text-purple-400" />
                     <span>Pune, India (Hybrid)</span>
                   </div>
                 </div>
@@ -75,9 +85,9 @@ export default function Experience() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
                 
                 {/* Highlight 1: APIs */}
-                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300">
-                  <div className="text-purple-400 font-bold text-base mb-1 flex justify-center">
-                    <Zap className="w-5 h-5 mb-1" />
+                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center">
+                  <div className="text-purple-400 font-bold text-base mb-1">
+                    <AnimatedZap className="w-5 h-5 mb-1" />
                   </div>
                   <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
                     API Response Caching Latency Reduced by 70%
@@ -85,9 +95,9 @@ export default function Experience() {
                 </div>
 
                 {/* Highlight 2: Security */}
-                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300">
-                  <div className="text-purple-400 font-bold text-base mb-1 flex justify-center">
-                    <ShieldCheck className="w-5 h-5 mb-1" />
+                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center">
+                  <div className="text-purple-400 font-bold text-base mb-1">
+                    <AnimatedShieldCheck className="w-5 h-5 mb-1" />
                   </div>
                   <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
                     Stateless JWT &amp; Secure RBAC Decorators
@@ -95,9 +105,9 @@ export default function Experience() {
                 </div>
 
                 {/* Highlight 3: Sprint */}
-                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300">
-                  <div className="text-purple-400 font-bold text-base mb-1 flex justify-center">
-                    <Users className="w-5 h-5 mb-1" />
+                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center">
+                  <div className="text-purple-400 font-bold text-base mb-1">
+                    <AnimatedUsers className="w-5 h-5 mb-1" />
                   </div>
                   <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
                     96.4% Sprint completion rate over residency
@@ -105,9 +115,9 @@ export default function Experience() {
                 </div>
 
                 {/* Highlight 4: CI/CD */}
-                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300">
-                  <div className="text-purple-400 font-bold text-base mb-1 flex justify-center">
-                    <Activity className="w-5 h-5 mb-1" />
+                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center">
+                  <div className="text-purple-400 font-bold text-base mb-1">
+                    <AnimatedActivity className="w-5 h-5 mb-1" />
                   </div>
                   <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
                     100% stable CI/CD Actions build success rate
@@ -119,7 +129,7 @@ export default function Experience() {
               {/* Key Contributions & Responsibilities */}
               <div className="mb-6 sm:mb-8">
                 <h4 className="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                  <Code className="w-5 h-5 text-purple-400" />
+                  <AnimatedCode className="w-5 h-5 text-purple-400" />
                   Key Responsibilities
                 </h4>
                 <ul className="space-y-3">
@@ -142,7 +152,7 @@ export default function Experience() {
               {/* Technologies Used Tag Row */}
               <div>
                 <h4 className="text-lg sm:text-xl font-semibold text-white mb-3 flex items-center gap-2">
-                  <Database className="w-5 h-5 text-indigo-400" />
+                  <AnimatedDatabase className="w-5 h-5 text-indigo-400" />
                   Technologies Used
                 </h4>
                 <div className="flex flex-wrap gap-1.5 mt-2">

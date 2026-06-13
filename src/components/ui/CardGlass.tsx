@@ -20,6 +20,7 @@ export default function CardGlass({
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover="hover"
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
       className={`glassmorphism glow-card rounded-2xl p-6 md:p-8 relative overflow-hidden group ${className}`}
