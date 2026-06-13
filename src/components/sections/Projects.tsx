@@ -5,7 +5,6 @@ import { ArrowUpRight, Sparkles, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const PROJECTS = [
-  
   {
   id: "mkphotography",
 
