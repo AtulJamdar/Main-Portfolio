@@ -12,8 +12,10 @@ import {
   AnimatedShieldCheck,
   AnimatedActivity
 } from "@/components/ui/AnimatedIcons";
+import HoverContainer from "@/components/ui/HoverContainer";
 
 export default function Experience() {
+
   return (
     <section id="experience" className="py-20 md:py-32 bg-black w-full text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,7 +32,7 @@ export default function Experience() {
             Building impactful solutions that transform industries
           </p>
         </div>
-
+ 
         {/* Experience Timeline Card stack */}
         <div className="space-y-12 max-w-5xl mx-auto">
           
@@ -63,14 +65,22 @@ export default function Experience() {
                 
                 {/* Date / Location Info */}
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-gray-400 text-xs sm:text-sm">
-                  <div className="flex items-center gap-1.5">
-                    <AnimatedCalendar className="w-4 h-4 text-purple-400" />
-                    <span>June 2024 — December 2024</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <AnimatedMapPin className="w-4 h-4 text-purple-400" />
-                    <span>Pune, India (Hybrid)</span>
-                  </div>
+                  <HoverContainer className="flex items-center gap-1.5 cursor-pointer hover:text-white transition-colors duration-200">
+                    {(isHov) => (
+                      <>
+                        <AnimatedCalendar className="w-4 h-4 text-purple-400" isHovered={isHov} />
+                        <span>June 2024 — December 2024</span>
+                      </>
+                    )}
+                  </HoverContainer>
+                  <HoverContainer className="flex items-center gap-1.5 cursor-pointer hover:text-white transition-colors duration-200">
+                    {(isHov) => (
+                      <>
+                        <AnimatedMapPin className="w-4 h-4 text-purple-400" isHovered={isHov} />
+                        <span>Pune, India (Hybrid)</span>
+                      </>
+                    )}
+                  </HoverContainer>
                 </div>
               </div>
 
@@ -85,53 +95,73 @@ export default function Experience() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
                 
                 {/* Highlight 1: APIs */}
-                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center">
-                  <div className="text-purple-400 font-bold text-base mb-1">
-                    <AnimatedZap className="w-5 h-5 mb-1" />
-                  </div>
-                  <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
-                    API Response Caching Latency Reduced by 70%
-                  </p>
-                </div>
+                <HoverContainer className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center cursor-pointer">
+                  {(isHov) => (
+                    <>
+                      <div className="text-purple-400 font-bold text-base mb-1">
+                        <AnimatedZap className="w-5 h-5 mb-1" isHovered={isHov} />
+                      </div>
+                      <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
+                        API Response Caching Latency Reduced by 70%
+                      </p>
+                    </>
+                  )}
+                </HoverContainer>
 
                 {/* Highlight 2: Security */}
-                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center">
-                  <div className="text-purple-400 font-bold text-base mb-1">
-                    <AnimatedShieldCheck className="w-5 h-5 mb-1" />
-                  </div>
-                  <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
-                    Stateless JWT &amp; Secure RBAC Decorators
-                  </p>
-                </div>
+                <HoverContainer className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center cursor-pointer">
+                  {(isHov) => (
+                    <>
+                      <div className="text-purple-400 font-bold text-base mb-1">
+                        <AnimatedShieldCheck className="w-5 h-5 mb-1" isHovered={isHov} />
+                      </div>
+                      <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
+                        Stateless JWT &amp; Secure RBAC Decorators
+                      </p>
+                    </>
+                  )}
+                </HoverContainer>
 
                 {/* Highlight 3: Sprint */}
-                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center">
-                  <div className="text-purple-400 font-bold text-base mb-1">
-                    <AnimatedUsers className="w-5 h-5 mb-1" />
-                  </div>
-                  <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
-                    96.4% Sprint completion rate over residency
-                  </p>
-                </div>
+                <HoverContainer className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center cursor-pointer">
+                  {(isHov) => (
+                    <>
+                      <div className="text-purple-400 font-bold text-base mb-1">
+                        <AnimatedUsers className="w-5 h-5 mb-1" isHovered={isHov} />
+                      </div>
+                      <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
+                        96.4% Sprint completion rate over residency
+                      </p>
+                    </>
+                  )}
+                </HoverContainer>
 
                 {/* Highlight 4: CI/CD */}
-                <div className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center">
-                  <div className="text-purple-400 font-bold text-base mb-1">
-                    <AnimatedActivity className="w-5 h-5 mb-1" />
-                  </div>
-                  <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
-                    100% stable CI/CD Actions build success rate
-                  </p>
-                </div>
+                <HoverContainer className="bg-zinc-900/40 rounded-lg p-3 sm:p-4 text-center border border-purple-950 hover:border-purple-500/30 transition-colors duration-300 flex flex-col items-center justify-center cursor-pointer">
+                  {(isHov) => (
+                    <>
+                      <div className="text-purple-400 font-bold text-base mb-1">
+                        <AnimatedActivity className="w-5 h-5 mb-1" isHovered={isHov} />
+                      </div>
+                      <p className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">
+                        100% stable CI/CD Actions build success rate
+                      </p>
+                    </>
+                  )}
+                </HoverContainer>
 
               </div>
 
               {/* Key Contributions & Responsibilities */}
               <div className="mb-6 sm:mb-8">
-                <h4 className="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                  <AnimatedCode className="w-5 h-5 text-purple-400" />
-                  Key Responsibilities
-                </h4>
+                <HoverContainer className="w-fit cursor-pointer">
+                  {(isHov) => (
+                    <h4 className="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                      <AnimatedCode className="w-5 h-5 text-purple-400" isHovered={isHov} />
+                      Key Responsibilities
+                    </h4>
+                  )}
+                </HoverContainer>
                 <ul className="space-y-3">
                   {[
                     "Refactored legacy backend endpoints using asynchronous Node.js controllers. Configured Redis cache structures at the API boundary, reducing response latencies by 70%.",
@@ -151,10 +181,14 @@ export default function Experience() {
 
               {/* Technologies Used Tag Row */}
               <div>
-                <h4 className="text-lg sm:text-xl font-semibold text-white mb-3 flex items-center gap-2">
-                  <AnimatedDatabase className="w-5 h-5 text-indigo-400" />
-                  Technologies Used
-                </h4>
+                <HoverContainer className="w-fit cursor-pointer">
+                  {(isHov) => (
+                    <h4 className="text-lg sm:text-xl font-semibold text-white mb-3 flex items-center gap-2">
+                      <AnimatedDatabase className="w-5 h-5 text-indigo-400" isHovered={isHov} />
+                      Technologies Used
+                    </h4>
+                  )}
+                </HoverContainer>
                 <div className="flex flex-wrap gap-1.5 mt-2">
                   {["Node.js", "Express.js", "FastAPI", "PostgreSQL", "JWT", "RBAC", "Redis", "Docker", "GitHub Actions"].map((tech) => (
                     <span

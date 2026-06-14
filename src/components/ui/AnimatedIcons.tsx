@@ -21,12 +21,39 @@ import {
   Camera
 } from "lucide-react";
 
-interface IconProps {
+export interface IconProps {
   className?: string;
+  isHovered?: boolean;
 }
 
+import { CardHoverContext } from "./CardGlass";
+
+// Custom hook to determine Framer Motion trigger props dynamically
+const useTriggerProps = (isHovered?: boolean) => {
+  const contextHovered = React.useContext(CardHoverContext);
+
+  if (isHovered !== undefined) {
+    return {
+      animate: isHovered ? "hover" : "initial",
+      initial: "initial"
+    };
+  }
+
+  if (contextHovered !== undefined) {
+    return {
+      animate: contextHovered ? "hover" : "initial",
+      initial: "initial"
+    };
+  }
+
+  return {
+    whileHover: "hover",
+    initial: "initial"
+  };
+};
+
 // 1. Cpu Icon - Rotates core/lines once
-export function AnimatedCpu({ className }: IconProps) {
+export function AnimatedCpu({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -37,8 +64,7 @@ export function AnimatedCpu({ className }: IconProps) {
           transition: { duration: 0.5, ease: "easeInOut" }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Cpu className="w-full h-full" />
@@ -47,7 +73,7 @@ export function AnimatedCpu({ className }: IconProps) {
 }
 
 // 2. Rocket Icon - Launches once (moves up & right with vibration)
-export function AnimatedRocket({ className }: IconProps) {
+export function AnimatedRocket({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -59,8 +85,7 @@ export function AnimatedRocket({ className }: IconProps) {
           transition: { duration: 0.6, ease: "easeInOut" }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Rocket className="w-full h-full" />
@@ -69,7 +94,7 @@ export function AnimatedRocket({ className }: IconProps) {
 }
 
 // 3. BrainCircuit Icon - Pulsing glow once
-export function AnimatedBrainCircuit({ className }: IconProps) {
+export function AnimatedBrainCircuit({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -84,8 +109,7 @@ export function AnimatedBrainCircuit({ className }: IconProps) {
           transition: { duration: 0.8, ease: "easeInOut" }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <BrainCircuit className="w-full h-full" />
@@ -93,8 +117,8 @@ export function AnimatedBrainCircuit({ className }: IconProps) {
   );
 }
 
-// 4. Server Icon - Slides racks & blinking LEDs once
-export function AnimatedServer({ className }: IconProps) {
+// 4. Server Icon - slides racks & blinking LEDs once
+export function AnimatedServer({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -104,8 +128,7 @@ export function AnimatedServer({ className }: IconProps) {
           transition: { duration: 0.3 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={`relative ${className}`}
     >
       <Server className="w-full h-full" />
@@ -145,7 +168,7 @@ export function AnimatedServer({ className }: IconProps) {
 }
 
 // 5. Workflow Icon - Rotates once
-export function AnimatedWorkflow({ className }: IconProps) {
+export function AnimatedWorkflow({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -156,8 +179,7 @@ export function AnimatedWorkflow({ className }: IconProps) {
           transition: { duration: 0.6 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Workflow className="w-full h-full" />
@@ -166,7 +188,7 @@ export function AnimatedWorkflow({ className }: IconProps) {
 }
 
 // 6. ChartColumn Icon - rising staggered columns once (npx shadcn@latest add @animate-ui/icons-chart-column)
-export function AnimatedChartColumn({ className }: IconProps) {
+export function AnimatedChartColumn({ className, isHovered }: IconProps) {
   return (
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"
@@ -183,8 +205,7 @@ export function AnimatedChartColumn({ className }: IconProps) {
           transition: { duration: 0.3 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <motion.path
@@ -229,7 +250,7 @@ export function AnimatedChartColumn({ className }: IconProps) {
 }
 
 // 7. BarChart3 Icon - Backup bounce
-export function AnimatedBarChart3({ className }: IconProps) {
+export function AnimatedBarChart3({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -240,8 +261,7 @@ export function AnimatedBarChart3({ className }: IconProps) {
           transition: { duration: 0.4 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <BarChart3 className="w-full h-full" />
@@ -250,7 +270,7 @@ export function AnimatedBarChart3({ className }: IconProps) {
 }
 
 // 8. Zap Icon - shake and pulse glow once
-export function AnimatedZap({ className }: IconProps) {
+export function AnimatedZap({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -266,8 +286,7 @@ export function AnimatedZap({ className }: IconProps) {
           transition: { duration: 0.6 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Zap className="w-full h-full" />
@@ -276,7 +295,7 @@ export function AnimatedZap({ className }: IconProps) {
 }
 
 // 9. ShieldCheck Icon - Flip and scale once
-export function AnimatedShieldCheck({ className }: IconProps) {
+export function AnimatedShieldCheck({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -287,8 +306,7 @@ export function AnimatedShieldCheck({ className }: IconProps) {
           transition: { duration: 0.8, ease: "easeInOut" }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <ShieldCheck className="w-full h-full" />
@@ -297,7 +315,7 @@ export function AnimatedShieldCheck({ className }: IconProps) {
 }
 
 // 10. Users Icon - Pulse once
-export function AnimatedUsers({ className }: IconProps) {
+export function AnimatedUsers({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -307,8 +325,7 @@ export function AnimatedUsers({ className }: IconProps) {
           transition: { duration: 0.4, ease: "easeInOut" }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Users className="w-full h-full" />
@@ -317,7 +334,7 @@ export function AnimatedUsers({ className }: IconProps) {
 }
 
 // 11. Activity Icon - Heartbeat once
-export function AnimatedActivity({ className }: IconProps) {
+export function AnimatedActivity({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -327,8 +344,7 @@ export function AnimatedActivity({ className }: IconProps) {
           transition: { duration: 0.7 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Activity className="w-full h-full" />
@@ -337,7 +353,7 @@ export function AnimatedActivity({ className }: IconProps) {
 }
 
 // 12. Terminal Icon - Blinking typing effect once
-export function AnimatedTerminal({ className }: IconProps) {
+export function AnimatedTerminal({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -348,8 +364,7 @@ export function AnimatedTerminal({ className }: IconProps) {
           transition: { duration: 0.3 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Terminal className="w-full h-full" />
@@ -358,7 +373,7 @@ export function AnimatedTerminal({ className }: IconProps) {
 }
 
 // 13. Calendar Icon - Wiggle once
-export function AnimatedCalendar({ className }: IconProps) {
+export function AnimatedCalendar({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -368,8 +383,7 @@ export function AnimatedCalendar({ className }: IconProps) {
           transition: { duration: 0.5 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Calendar className="w-full h-full" />
@@ -378,7 +392,7 @@ export function AnimatedCalendar({ className }: IconProps) {
 }
 
 // 14. MapPin Icon - Bounce once
-export function AnimatedMapPin({ className }: IconProps) {
+export function AnimatedMapPin({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -389,8 +403,7 @@ export function AnimatedMapPin({ className }: IconProps) {
           transition: { duration: 0.6, ease: "easeInOut" }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <MapPin className="w-full h-full" />
@@ -399,7 +412,7 @@ export function AnimatedMapPin({ className }: IconProps) {
 }
 
 // 15. Code Icon - Expands brackets once
-export function AnimatedCode({ className }: IconProps) {
+export function AnimatedCode({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -409,8 +422,7 @@ export function AnimatedCode({ className }: IconProps) {
           transition: { duration: 0.3 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Code className="w-full h-full" />
@@ -419,7 +431,7 @@ export function AnimatedCode({ className }: IconProps) {
 }
 
 // 16. Database Icon - Compression/stretch once
-export function AnimatedDatabase({ className }: IconProps) {
+export function AnimatedDatabase({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -430,8 +442,7 @@ export function AnimatedDatabase({ className }: IconProps) {
           transition: { duration: 0.6 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Database className="w-full h-full" />
@@ -440,7 +451,7 @@ export function AnimatedDatabase({ className }: IconProps) {
 }
 
 // 17. Camera Icon - shutter click once
-export function AnimatedCamera({ className }: IconProps) {
+export function AnimatedCamera({ className, isHovered }: IconProps) {
   return (
     <motion.div
       variants={{
@@ -451,8 +462,7 @@ export function AnimatedCamera({ className }: IconProps) {
           transition: { duration: 0.4 }
         }
       }}
-      whileHover="hover"
-      initial="initial"
+      {...useTriggerProps(isHovered)}
       className={className}
     >
       <Camera className="w-full h-full" />

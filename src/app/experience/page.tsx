@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -8,6 +10,7 @@ import {
   AnimatedTerminal,
   AnimatedCalendar
 } from "@/components/ui/AnimatedIcons";
+import HoverContainer from "@/components/ui/HoverContainer";
 
 export default function ExperiencePage() {
   return (
@@ -54,17 +57,27 @@ export default function ExperiencePage() {
               
               {/* Left Column: Residency Meta (col-span-4) */}
               <div className="lg:col-span-4 space-y-4">
-                <div className="p-3 rounded-lg bg-zinc-900 border border-white/5 w-fit text-brand-primary">
-                  <AnimatedTerminal className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white">Cravita Technologies</h3>
-                  <p className="text-xs text-zinc-400 font-mono mt-1">SOFTWARE ENGINEER RESIDENT</p>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-zinc-500 font-mono">
-                  <AnimatedCalendar className="w-4 h-4" />
-                  <span>June 2024 — December 2024</span>
-                </div>
+                <HoverContainer className="space-y-4">
+                  {(isHov) => (
+                    <>
+                      <div className="p-3 rounded-lg bg-zinc-900 border border-white/5 w-fit text-brand-primary">
+                        <AnimatedTerminal className="w-5 h-5" isHovered={isHov} />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-white">Cravita Technologies</h3>
+                        <p className="text-xs text-zinc-400 font-mono mt-1">SOFTWARE ENGINEER RESIDENT</p>
+                      </div>
+                    </>
+                  )}
+                </HoverContainer>
+                <HoverContainer className="flex items-center gap-2 text-xs text-zinc-500 font-mono cursor-pointer hover:text-white transition-colors duration-200">
+                  {(isHov) => (
+                    <>
+                      <AnimatedCalendar className="w-4 h-4" isHovered={isHov} />
+                      <span>June 2024 — December 2024</span>
+                    </>
+                  )}
+                </HoverContainer>
               </div>
 
               {/* Right Column: Narrative & Technical Work (col-span-8) */}

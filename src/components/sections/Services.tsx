@@ -51,6 +51,8 @@ const SERVICES = [
 ];
 
 export default function Services() {
+  const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
+
   return (
     <section id="services" className="py-16 sm:py-32 bg-black w-full text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,48 +73,53 @@ export default function Services() {
 
         {/* Responsive Grid/Slider Layout */}
         <div className="flex overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {SERVICES.map((srv, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover="hover"
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="snap-center min-w-[80vw] md:min-w-0 h-[360px] sm:h-[380px] p-6 sm:p-8 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl sm:rounded-3xl shadow-lg flex flex-col justify-between hover:border-purple-500/20 hover:shadow-purple-500/5 transition-all duration-300 group flex-shrink-0 md:flex-shrink"
-            >
-              <div>
-                {/* Animated Icon Box */}
-                <div className="p-3 rounded-lg bg-zinc-950 border border-white/5 w-fit group-hover:border-purple-500/20 hover:bg-black transition-all duration-300 mb-4 sm:mb-6">
-                  {srv.icon}
+          {SERVICES.map((srv, idx) => {
+            const isHovered = hoveredIdx === idx;
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover="hover"
+                onMouseEnter={() => setHoveredIdx(idx)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className="snap-center min-w-[80vw] md:min-w-0 h-[360px] sm:h-[380px] p-6 sm:p-8 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl sm:rounded-3xl shadow-lg flex flex-col justify-between hover:border-purple-500/20 hover:shadow-purple-500/5 transition-all duration-300 group flex-shrink-0 md:flex-shrink"
+              >
+                <div>
+                  {/* Animated Icon Box */}
+                  <div className="p-3 rounded-lg bg-zinc-950 border border-white/5 w-fit group-hover:border-purple-500/20 hover:bg-black transition-all duration-300 mb-4 sm:mb-6">
+                    {React.cloneElement(srv.icon as React.ReactElement<any>, { isHovered })}
+                  </div>
+
+                  {/* Service Tagline & Title */}
+                  <div className="mb-2">
+                    <span className="text-[9px] font-bold font-mono tracking-widest text-zinc-500 uppercase block mb-1">
+                      {srv.tagline}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-bold text-white leading-tight">
+                      {srv.title}
+                    </h3>
+                  </div>
+
+                  {/* Service Description */}
+                  <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mt-2">
+                    {srv.description}
+                  </p>
                 </div>
 
-                {/* Service Tagline & Title */}
-                <div className="mb-2">
-                  <span className="text-[9px] font-bold font-mono tracking-widest text-zinc-500 uppercase block mb-1">
-                    {srv.tagline}
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-white leading-tight">
-                    {srv.title}
-                  </h3>
+                {/* Bottom CTA Button */}
+                <div className="mt-3 sm:mt-4">
+                  <button className="text-purple-400 hover:text-purple-300 font-semibold text-xs sm:text-sm transition-colors flex items-center gap-1.5 group/btn cursor-pointer">
+                    Learn more 
+                    <span className="group-hover/btn:translate-x-1.5 transition-transform duration-200">→</span>
+                  </button>
                 </div>
 
-                {/* Service Description */}
-                <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mt-2">
-                  {srv.description}
-                </p>
-              </div>
-
-              {/* Bottom CTA Button */}
-              <div className="mt-3 sm:mt-4">
-                <button className="text-purple-400 hover:text-purple-300 font-semibold text-xs sm:text-sm transition-colors flex items-center gap-1.5 group/btn cursor-pointer">
-                  Learn more 
-                  <span className="group-hover/btn:translate-x-1.5 transition-transform duration-200">→</span>
-                </button>
-              </div>
-
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
       </div>

@@ -1,7 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+
+export const CardHoverContext = React.createContext<boolean | undefined>(undefined);
 
 interface CardGlassProps {
   children: React.ReactNode;
@@ -16,11 +18,14 @@ export default function CardGlass({
   hoverGlow = true,
   delay = 0,
 }: CardGlassProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
-      whileHover="hover"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
       className={`glassmorphism glow-card rounded-2xl p-6 md:p-8 relative overflow-hidden group ${className}`}
@@ -31,7 +36,9 @@ export default function CardGlass({
       {/* Subtle radial inner glow effect */}
       <div className="absolute -inset-px bg-gradient-to-r from-brand-primary/0 via-brand-primary/0 to-brand-primary/0 group-hover:from-brand-primary/5 group-hover:via-brand-secondary/5 group-hover:to-transparent rounded-2xl transition-all duration-700 pointer-events-none" />
       
-      <div className="relative z-10">{children}</div>
+      <CardHoverContext.Provider value={isHovered}>
+        <div className="relative z-10">{children}</div>
+      </CardHoverContext.Provider>
     </motion.div>
   );
 }

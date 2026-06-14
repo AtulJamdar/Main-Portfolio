@@ -120,7 +120,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Starting action buttons same as talaganarajesh.in */}
+      
       <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 left-0 right-0 z-20 pb-4 flex justify-center pointer-events-auto">
         <motion.div 
           initial={{ opacity: 0, y: 15 }}

@@ -10,7 +10,7 @@ import {
   AnimatedBrainCircuit,
   AnimatedServer,
   AnimatedWorkflow,
-  AnimatedBarChart3
+  AnimatedChartColumn
 } from "@/components/ui/AnimatedIcons";
 
 export default function ServicesPage() {
@@ -90,7 +90,7 @@ export default function ServicesPage() {
               tagline: "CORE WEB VITALS PROFILE & RERENDER FIXES",
               desc: "Refactor slow legacy systems to maximize speed, conversion rates, and SEO indexing authority. I profile component structures to deliver sub-second rendering speeds.",
               specs: "Bundle separation splitters, database query optimizations, state managers profiling, and Lighthouse score audit reviews.",
-              icon: <AnimatedBarChart3 className="w-5 h-5 text-amber-500" />
+              icon: <AnimatedChartColumn className="w-5 h-5 text-amber-500" />
             }
           ].map((srv, idx) => (
             <CardGlass key={idx} className="flex flex-col justify-between space-y-6">

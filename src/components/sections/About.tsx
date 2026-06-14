@@ -78,7 +78,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mx-auto w-full">
           
           {/* Card 1: Tech Enthusiast (Icon Cloud sphere) */}
-          <SectionReveal className="group relative overflow-hidden rounded-3xl border border-zinc-900 bg-zinc-950/40 backdrop-blur-sm shadow-md transition-all hover:border-zinc-800 md:col-span-4 md:row-span-2 min-h-[480px] flex flex-col justify-between">
+          <SectionReveal className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/60 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 md:row-span-2 min-h-[480px] flex flex-col justify-between">
             <div className="h-full p-7 flex flex-col justify-between">
               <div>
                 <p className="text-xs text-zinc-550 font-mono tracking-tight mb-2">Tech Enthusiast</p>
@@ -100,7 +100,7 @@ export default function About() {
           </SectionReveal>
 
           {/* Card 2: Let's work together */}
-          <SectionReveal className="group relative overflow-hidden rounded-3xl border border-zinc-900 bg-zinc-950/40 backdrop-blur-sm shadow-md transition-all hover:border-zinc-800 md:col-span-4 h-64 flex flex-col justify-between">
+          <SectionReveal className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/60 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 h-64 flex flex-col justify-between">
             <div className="h-full p-7 flex flex-col justify-between">
               <div>
                 <h3 className="font-extrabold text-zinc-100 text-xl">Let's work together</h3>
@@ -134,7 +134,7 @@ export default function About() {
           </SectionReveal>
 
           {/* Card 3: Remote */}
-          <SectionReveal className="group relative overflow-hidden rounded-3xl border border-zinc-900 bg-zinc-950/40 backdrop-blur-sm shadow-md transition-all hover:border-zinc-800 md:col-span-4 h-64 flex flex-col justify-between">
+          <SectionReveal className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/60 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 h-64 flex flex-col justify-between">
             <div className="h-full p-7 flex flex-col justify-between relative overflow-hidden">
               
               {/* Glowing animated background globe */}
@@ -163,7 +163,7 @@ export default function About() {
           </SectionReveal>
 
           {/* Card 4: Behind the Scenes (Process tracker list) */}
-          <SectionReveal className="group relative overflow-hidden rounded-3xl border border-zinc-900 bg-zinc-950/40 backdrop-blur-sm shadow-md transition-all hover:border-zinc-800 md:col-span-8 flex flex-col justify-between min-h-[220px]">
+          <SectionReveal className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/60 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-8 flex flex-col justify-between min-h-[220px]">
             <div className="h-full p-7 flex flex-col justify-between w-full">
               <div>
                 <p className="text-xs text-zinc-550 font-mono tracking-tight mb-2">Behind the Scenes</p>
@@ -176,7 +176,7 @@ export default function About() {
                 {PROCESS_ITEMS.map((item, idx) => (
                   <div 
                     key={idx} 
-                    className="bg-zinc-900/35 border border-zinc-900 hover:border-brand-primary/20 rounded-2xl p-5 w-[210px] flex-shrink-0 flex flex-col justify-between transition-colors snap-start"
+                    className="bg-zinc-900/60 border border-zinc-800/80 hover:border-brand-primary/20 rounded-2xl p-5 w-[210px] flex-shrink-0 flex flex-col justify-between transition-colors snap-start"
                   >
                     <h4 className="text-xs font-extrabold text-zinc-200 tracking-tight mb-2">{item.title}</h4>
                     <p className="text-[10px] text-zinc-450 leading-relaxed">{item.desc}</p>
