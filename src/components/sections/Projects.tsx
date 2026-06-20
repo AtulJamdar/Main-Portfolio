@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ArrowUpRight, Sparkles, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import SectionReveal from "../ui/SectionReveal";
 
 const PROJECTS = [
   {
@@ -203,11 +204,11 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="bg-black w-full text-white pt-20 md:pt-32 pb-16 overflow-visible">
+    <section id="projects" className="bg-black w-full text-white pt-20 md:pt-32 pb-16 overflow-visible relative z-10">
       <div className="pt-5 px-4 md:px-10 max-w-7xl mx-auto">
         
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-20">
+        <SectionReveal className="text-center mb-12 sm:mb-20">
           <h2 className="text-gray-300 uppercase tracking-wider font-medium text-xs md:text-sm mb-1 md:mb-2">
             Code Meets Creativity
           </h2>
@@ -217,10 +218,10 @@ export default function Projects() {
               Projects
             </span>
           </div>
-        </div>
+        </SectionReveal>
 
         {/* Splits Showcase Container */}
-        <div className="relative">
+        <SectionReveal delay={0.15} className="relative">
           <div className="flex flex-col md:flex-row items-stretch">
             
             {/* Left Column: Desktop STICKY descriptions panel (md:block) */}
@@ -429,7 +430,7 @@ export default function Projects() {
             </div>
 
           </div>
-        </div>
+        </SectionReveal>
 
       </div>
     </section>

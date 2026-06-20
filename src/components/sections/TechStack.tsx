@@ -75,7 +75,7 @@ export default function TechStack() {
     <section
       ref={containerRef}
       id="techstack"
-      className="min-h-screen w-full pt-24 sm:pt-40 bg-black text-white py-12 sm:py-20 relative overflow-hidden"
+      className="min-h-screen w-full pt-24 sm:pt-40 bg-black text-white py-12 sm:py-20 relative z-10 overflow-hidden"
     >
       <div className="container mx-auto px-4 relative z-10">
         

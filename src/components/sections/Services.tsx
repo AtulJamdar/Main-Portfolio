@@ -54,7 +54,7 @@ export default function Services() {
   const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
 
   return (
-    <section id="services" className="py-16 sm:py-32 bg-black w-full text-white overflow-hidden">
+    <section id="services" className="py-16 sm:py-32 bg-black w-full text-white overflow-hidden relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

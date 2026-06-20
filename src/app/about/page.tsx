@@ -62,15 +62,15 @@ export default function AboutPage() {
           
           {/* Left Column: Avatar & Socials */}
           <div className="w-full lg:w-1/3 flex flex-col items-center">
-            <div className="relative group cursor-pointer mb-6">
+            <div className="relative mb-6">
               {/* Glow backdrop */}
-              <div className="absolute -inset-3 bg-gradient-to-r from-purple-600 to-pink-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-75 transition duration-500 animate-pulse" />
+              <div className="absolute -inset-3 bg-gradient-to-r from-purple-600 to-pink-500 rounded-2xl blur-lg opacity-40 animate-pulse" />
               
               <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-2xl overflow-hidden border-2 border-zinc-800 bg-zinc-950">
                 <img
                   src="/atul-jamdar.jpeg"
                   alt="Atul Jamdar"
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
                     const fallback = e.currentTarget.parentElement?.querySelector(".fallback-avatar");

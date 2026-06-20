@@ -13,15 +13,16 @@ import {
   AnimatedActivity
 } from "@/components/ui/AnimatedIcons";
 import HoverContainer from "@/components/ui/HoverContainer";
+import SectionReveal from "../ui/SectionReveal";
 
 export default function Experience() {
 
   return (
-    <section id="experience" className="py-20 md:py-32 bg-black w-full text-white overflow-hidden">
+    <section id="experience" className="py-20 md:py-32 bg-black w-full text-white overflow-hidden relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-16 sm:mb-24">
+        <SectionReveal className="text-center mb-16 sm:mb-24">
           <div className="inline-block px-3 py-1 rounded-full bg-purple-950/50 border border-purple-800/30 text-purple-400 text-xs font-mono font-bold uppercase tracking-wider mb-4">
             Professional Experience
           </div>
@@ -31,7 +32,7 @@ export default function Experience() {
           <p className="text-sm sm:text-base md:text-xl text-gray-400 max-w-2xl mx-auto">
             Building impactful solutions that transform industries
           </p>
-        </div>
+        </SectionReveal>
  
         {/* Experience Timeline Card stack */}
         <div className="space-y-12 max-w-5xl mx-auto">

@@ -55,6 +55,7 @@ function GravityStarsBackground({
   const animRef = React.useRef<number | null>(null);
   const starsRef = React.useRef<Particle[]>([]);
   const mouseRef = React.useRef<{ x: number; y: number }>({ x: -10000, y: -10000 });
+  const [isReady, setIsReady] = React.useState(false);
   const [dpr, setDpr] = React.useState(1);
   const [canvasSize, setCanvasSize] = React.useState({
     width: 800,
@@ -114,6 +115,7 @@ function GravityStarsBackground({
     } else {
       redistributeStars(rect.width, rect.height);
     }
+    setIsReady(true);
   }, [initStars, redistributeStars]);
 
   const handlePointerMove = React.useCallback(
@@ -389,7 +391,13 @@ function GravityStarsBackground({
       className={cn("relative size-full overflow-hidden", className)}
       {...props}
     >
-      <canvas ref={canvasRef} className="block w-full h-full" />
+      <canvas
+        ref={canvasRef}
+        className={cn(
+          "block w-full h-full transition-opacity duration-1000",
+          isReady ? "opacity-100" : "opacity-0"
+        )}
+      />
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center pt-28 pb-40 overflow-hidden">
       {/* Deep purple-indigo space gradient and stars canvas (matched exactly to talaganarajesh.in) */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-purple-950 to-indigo-500 pointer-events-none">
+      <div className="fixed inset-0 z-0 bg-gradient-to-b from-purple-950 to-indigo-500 pointer-events-none">
         <div className="absolute inset-0 bg-black/60 z-0" />
         <div className="absolute inset-0 opacity-85 z-10">
           <GravityStarsBackgroundDemo />
