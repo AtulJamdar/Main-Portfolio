@@ -12,8 +12,8 @@
   --color-brand-secondary: #8b5cf6;
   --color-brand-success: #10b981;
   
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
   
   --animate-border-beam: border-beam 6s linear infinite;
   --animate-text-load: text_713 3.5s ease both infinite;
@@ -106,10 +106,15 @@
   --secondary-accent: #8b5cf6;
 }
 
+html, body {
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
   overflow-x: hidden;
   scroll-behavior: smooth;
 }

@@ -1,139 +1,168 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
-import MagneticButton from "../ui/MagneticButton";
+import React from "react";
+import Link from "next/link";
+import { motion, Variants } from "framer-motion";
+import { Home, FolderGit2, User, Briefcase, MessageSquare } from "lucide-react";
 
-const NAV_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "About", href: "/about" },
-  { label: "Experience", href: "/experience" },
-  { label: "Contact", href: "/contact" },
+const MotionLink = motion(Link);
+
+interface MenuItem {
+  icon: React.ReactNode;
+  label: string;
+  href: string;
+  gradient: string;
+  iconColor: string;
+}
+
+const menuItems: MenuItem[] = [
+  {
+    icon: <Home className="h-5 w-5" />,
+    label: "Home",
+    href: "/",
+    gradient: "radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%)",
+    iconColor: "group-hover:text-blue-500 dark:group-hover:text-blue-400",
+  },
+  {
+    icon: <FolderGit2 className="h-5 w-5" />,
+    label: "Projects",
+    href: "/projects",
+    gradient: "radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(147,51,234,0.06) 50%, rgba(107,33,168,0) 100%)",
+    iconColor: "group-hover:text-purple-500 dark:group-hover:text-purple-400",
+  },
+  {
+    icon: <User className="h-5 w-5" />,
+    label: "About",
+    href: "/about",
+    gradient: "radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(5,150,105,0.06) 50%, rgba(4,120,87,0) 100%)",
+    iconColor: "group-hover:text-emerald-500 dark:group-hover:text-emerald-400",
+  },
+  {
+    icon: <Briefcase className="h-5 w-5" />,
+    label: "Experience",
+    href: "/experience",
+    gradient: "radial-gradient(circle, rgba(245,158,11,0.15) 0%, rgba(217,119,6,0.06) 50%, rgba(180,83,9,0) 100%)",
+    iconColor: "group-hover:text-amber-500 dark:group-hover:text-amber-400",
+  },
+  {
+    icon: <MessageSquare className="h-5 w-5" />,
+    label: "Contact",
+    href: "/contact",
+    gradient: "radial-gradient(circle, rgba(244,63,94,0.15) 0%, rgba(225,29,72,0.06) 50%, rgba(190,24,74,0) 100%)",
+    iconColor: "group-hover:text-rose-500 dark:group-hover:text-rose-400",
+  },
 ];
 
+const itemVariants: Variants = {
+  initial: { rotateX: 0, opacity: 1 },
+  hover: { rotateX: -90, opacity: 0 },
+};
+
+const backVariants: Variants = {
+  initial: { rotateX: 90, opacity: 0 },
+  hover: { rotateX: 0, opacity: 1 },
+};
+
+const glowVariants: Variants = {
+  initial: { opacity: 0, scale: 0.8 },
+  hover: {
+    opacity: 1,
+    scale: 2,
+    transition: {
+      opacity: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+      scale: { duration: 0.5, type: "spring", stiffness: 300, damping: 25 },
+    },
+  },
+};
+
+const navGlowVariants: Variants = {
+  initial: { opacity: 0 },
+  hover: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.4, 0, 0.2, 1],
+    },
+  },
+};
+
+const sharedTransition = {
+  type: "spring" as const,
+  stiffness: 100,
+  damping: 20,
+  duration: 0.5,
+};
+
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <>
+    <motion.div
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4"
+    >
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "py-4 bg-zinc-950/85 backdrop-blur-md border-b border-white/5"
-            : "py-6 bg-transparent"
-        }`}
+        className="p-1.5 rounded-2xl bg-zinc-950/20 backdrop-blur-md border border-white/5 shadow-2xl relative overflow-visible max-w-max flex items-center pl-4 pr-1.5 gap-5"
+        initial="initial"
+        whileHover="hover"
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Logo / Brand */}
-          <a
-            href="#"
-            className="text-lg font-bold tracking-tight text-white flex items-center gap-2 group cursor-pointer"
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-brand-primary animate-pulse" />
-            <span className="font-bold font-mono text-zinc-100 group-hover:text-white transition-all duration-300">
-              JA
-            </span>
-          </a>
+        {/* Logo / Brand */}
+        <Link href="/" className="text-base font-bold tracking-tight text-white flex items-center gap-2 group cursor-pointer">
+          <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
+          <span className="font-bold font-mono text-zinc-100 group-hover:text-white transition-all duration-300">
+            JA
+          </span>
+        </Link>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-8">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-300 relative py-1"
+        <ul className="flex items-center gap-1.5 relative z-10">
+          {menuItems.map((item: MenuItem) => (
+            <motion.li key={item.label} className="relative">
+              <motion.div
+                className="block rounded-xl overflow-visible group relative"
+                style={{ perspective: "600px" }}
+                whileHover="hover"
+                initial="initial"
               >
-                {item.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Desktop CTA Button */}
-          <div className="hidden md:block">
-            <a href="/contact">
-              <MagneticButton className="px-5 py-2 text-xs font-semibold tracking-wider text-white border border-white/10 rounded-full bg-white/5 hover:bg-white/10 transition-colors duration-300 flex items-center gap-1.5 overflow-hidden">
-                LET'S TALK
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </MagneticButton>
-            </a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-zinc-400 hover:text-white focus:outline-none cursor-pointer"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </motion.nav>
-
-      {/* Mobile Drawer Navigation */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 top-[72px] z-40 bg-zinc-950/95 backdrop-blur-lg border-t border-white/5 px-8 py-12 md:hidden flex flex-col justify-between h-[calc(100vh-72px)]"
-          >
-            <div className="flex flex-col gap-6">
-              {NAV_ITEMS.map((item, idx) => (
-                <motion.a
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  key={item.href}
+                
+                {/* Front-facing menu item */}
+                <MotionLink
                   href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-2xl font-semibold text-zinc-300 hover:text-white transition-colors duration-200"
+                  className="flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 relative z-10 bg-transparent text-zinc-400 group-hover:text-white transition-colors rounded-xl text-[15px] sm:text-base cursor-pointer"
+                  variants={itemVariants}
+                  transition={sharedTransition}
+                  style={{
+                    transformStyle: "preserve-3d",
+                    transformOrigin: "center bottom"
+                  }}
                 >
-                  {item.label}
-                </motion.a>
-              ))}
-            </div>
+                  <span className={`transition-colors duration-300 ${item.iconColor}`}>
+                    {item.icon}
+                  </span>
+                  <span className="font-medium hidden sm:inline">{item.label}</span>
+                </MotionLink>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-col gap-6"
-            >
-              <a
-                href="/contact"
-                onClick={() => setIsOpen(false)}
-                className="w-full text-center py-4 bg-brand-primary hover:bg-indigo-600 transition-colors text-white font-medium rounded-xl flex items-center justify-center gap-2"
-              >
-                LET'S TALK
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-              <div className="text-center text-xs text-zinc-500 font-mono">
-                © {new Date().getFullYear()} ATUL JAMDAR. ALL RIGHTS RESERVED.
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+                {/* Back-facing menu item for the 3D flip effect */}
+                <MotionLink
+                  href={item.href}
+                  className="flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 absolute inset-0 z-10 bg-transparent text-zinc-400 group-hover:text-white transition-colors rounded-xl text-[15px] sm:text-base cursor-pointer"
+                  variants={backVariants}
+                  transition={sharedTransition}
+                  style={{
+                    transformStyle: "preserve-3d",
+                    transformOrigin: "center top",
+                    transform: "rotateX(90deg)"
+                  }}
+                >
+                  <span className={`transition-colors duration-300 ${item.iconColor}`}>
+                    {item.icon}
+                  </span>
+                  <span className="font-medium hidden sm:inline">{item.label}</span>
+                </MotionLink>
+              </motion.div>
+            </motion.li>
+          ))}
+        </ul>
+      </motion.nav>
+    </motion.div>
   );
 }

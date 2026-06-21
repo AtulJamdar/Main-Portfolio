@@ -3,15 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CardGlass from "@/components/ui/CardGlass";
 import SectionReveal from "@/components/ui/SectionReveal";
-import { ArrowLeft, Award } from "lucide-react";
-import {
-  AnimatedCpu,
-  AnimatedRocket,
-  AnimatedBrainCircuit,
-  AnimatedServer,
-  AnimatedWorkflow,
-  AnimatedChartColumn
-} from "@/components/ui/AnimatedIcons";
+import { ArrowLeft, Cpu, Rocket, BrainCircuit, Server, Workflow, BarChart3 } from "lucide-react";
 
 export default function ServicesPage() {
   return (
@@ -55,42 +47,42 @@ export default function ServicesPage() {
               tagline: "NEXT.JS, NODE.JS, & STRICT TYPE ARCHITECTURES",
               desc: "Engineering secure, type-safe full-stack platforms. I map modular systems that guarantee strict data model validations, complete coverage, and reliable deployments.",
               specs: "Strict TypeScript, async Node loop optimizations, RESTful controllers, PostgreSQL coverings indices, and unified GraphQL schemas.",
-              icon: <AnimatedCpu className="w-5 h-5 text-brand-primary" />
+              icon: <Cpu className="w-5 h-5 text-brand-primary" />
             },
             {
               title: "SaaS Product Development",
               tagline: "PAYMENTS, SUBSCRIPTIONS, & CUSTOM DASHBOARDS",
               desc: "Building complete SaaS web platforms from database architectures to customer invoice checks. Integrate Stripe webhooks, user account settings, and analytics metrics.",
               specs: "Stripe multi-tiered checkout integration, OAuth/JWT state-free accounts layers, robust webhooks databases transactions, and automated cron logs.",
-              icon: <AnimatedRocket className="w-5 h-5 text-brand-secondary" />
+              icon: <Rocket className="w-5 h-5 text-brand-secondary" />
             },
             {
               title: "Cognitive AI Integrations",
               tagline: "LLM WORKSPACES, VECTOR STORES, & RAG PIPELINES",
               desc: "Incorporate semantic intelligence capabilities directly into your digital product. Setup automated document data ingestion, customized assistant contexts, and vector stores.",
               specs: "OpenAI assistant completions, Pinecone DB semantic search grids, langchain context management, and token audit checks.",
-              icon: <AnimatedBrainCircuit className="w-5 h-5 text-fuchsia-400" />
+              icon: <BrainCircuit className="w-5 h-5 text-fuchsia-400" />
             },
             {
               title: "API & High-Speed Caching",
               tagline: "LATENCY-TUNED REDIS ENDPOINTS & QUEUES",
               desc: "Constructing high-throughput, sub-second API layers. Setup Redis cache arrays, WebSocket event distribution structures, and asynchronous queues.",
               specs: "Redis connection pooling, Socket.io real-time event distributions, asynchronous message queue buffers, and request rate-limiting.",
-              icon: <AnimatedServer className="w-5 h-5 text-emerald-400" />
+              icon: <Server className="w-5 h-5 text-emerald-400" />
             },
             {
               title: "Custom Automation Pipelines",
               tagline: "GITHUB ACTIONS, WEBHOOKS, & DATABASES CRONS",
               desc: "Automate repetitive backend routines to drive company velocity. Build secure cron operations, sync Slack warnings, and automate continuous integration test pipelines.",
               specs: "GitHub Actions configurations, event-triggered webhooks maps, database aggregations sweeps, and transactional alert frameworks.",
-              icon: <AnimatedWorkflow className="w-5 h-5 text-sky-400" />
+              icon: <Workflow className="w-5 h-5 text-sky-400" />
             },
             {
               title: "Performance & Diagnostic Auditing",
               tagline: "CORE WEB VITALS PROFILE & RERENDER FIXES",
               desc: "Refactor slow legacy systems to maximize speed, conversion rates, and SEO indexing authority. I profile component structures to deliver sub-second rendering speeds.",
               specs: "Bundle separation splitters, database query optimizations, state managers profiling, and Lighthouse score audit reviews.",
-              icon: <AnimatedChartColumn className="w-5 h-5 text-amber-500" />
+              icon: <BarChart3 className="w-5 h-5 text-amber-500" />
             }
           ].map((srv, idx) => (
             <CardGlass key={idx} className="flex flex-col justify-between space-y-6">

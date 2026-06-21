@@ -2,11 +2,22 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { GravityStarsBackground } from "@/components/animate-ui/components/backgrounds/gravity-stars";
+import { StarsBackground } from "@/components/animate-ui/components/backgrounds/stars";
+import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
-export const GravityStarsBackgroundDemo = () => {
+export const StarsBackgroundDemo = () => {
+  const { resolvedTheme } = useTheme();
+
   return (
-    <GravityStarsBackground className="absolute inset-0 flex items-center justify-center rounded-xl" />
+    <StarsBackground
+      starColor={resolvedTheme === "dark" ? "#FFF" : "#000"}
+      starDensity={0.002}
+      speed={3.0}
+      className={cn(
+        "absolute inset-0 flex items-center justify-center rounded-xl"
+      )}
+    />
   );
 };
 
@@ -17,12 +28,12 @@ export default function Hero() {
       <div className="fixed inset-0 z-0 bg-gradient-to-b from-purple-950 to-indigo-500 pointer-events-none">
         <div className="absolute inset-0 bg-black/60 z-0" />
         <div className="absolute inset-0 opacity-85 z-10">
-          <GravityStarsBackgroundDemo />
+          <StarsBackgroundDemo />
         </div>
       </div>
 
       {/* Curved Section Separators with Glowing/Lightning border */}
-      <div className="absolute border-b-4 sm:border-b-6 md:border-b-8 mb-1 sm:mb-2 border-black bottom-0 left-0 right-0 h-40 sm:h-48 md:h-52 lg:h-40 xl:h-32 bg-purple-900/40 rounded-t-[100%] blur-md z-0 pointer-events-none" />
+      <div className="absolute mb-1 sm:mb-2 bottom-0 left-0 right-0 h-40 sm:h-48 md:h-52 lg:h-40 xl:h-32 bg-purple-900/40 rounded-t-[100%] blur-md z-0 pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-40 sm:h-48 md:h-52 lg:h-40 xl:h-32 bg-black rounded-t-[100%] z-0 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full text-center pb-12">
@@ -121,20 +132,20 @@ export default function Hero() {
       </div>
 
       
-      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 left-0 right-0 z-20 pb-4 flex justify-center pointer-events-auto">
+      <div className="absolute bottom-1 sm:bottom-2 md:bottom-3 lg:bottom-4 left-0 right-0 z-20 pb-1 sm:pb-2 flex justify-center pointer-events-auto">
         <motion.div 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 w-full px-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-10 w-full px-4"
         >
           <a 
-            className="group flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 bg-black/40 backdrop-blur-md rounded-full border border-white/20 text-zinc-300 hover:text-white hover:bg-black/60 transition-colors w-full sm:w-auto max-w-xs cursor-pointer" 
+            className="group flex items-center justify-center gap-4 px-11 py-5 sm:px-14 sm:py-6 bg-black/40 backdrop-blur-md rounded-full border border-white/20 text-zinc-300 hover:text-white hover:bg-black/60 transition-colors w-full sm:w-auto max-w-xs cursor-pointer text-lg sm:text-xl font-bold" 
             href="#contact"
           >
-            <span className="text-xs sm:text-sm font-medium">Let's Connect</span>
-            <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-zinc-700 flex items-center justify-center group-hover:bg-brand-secondary group-hover:translate-x-1.5 transition-all duration-300 ease-in-out">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 text-black">
+            <span>Let's Connect</span>
+            <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-zinc-700 flex items-center justify-center group-hover:bg-brand-secondary group-hover:translate-x-1.5 transition-all duration-300 ease-in-out">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-black">
                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path>
               </svg>
             </div>
@@ -142,13 +153,13 @@ export default function Hero() {
           
           <a 
             href="mailto:hello.atuljamdar@gmail.com" 
-            className="flex items-center z-10 justify-center gap-2 text-center w-full sm:w-auto cursor-pointer"
+            className="flex items-center z-10 justify-center gap-4 text-center w-full sm:w-auto cursor-pointer"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 text-zinc-500">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 text-zinc-500">
               <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="2.5"></rect>
               <path d="M2 7L9.95263 12.4526C10.5936 12.8747 11.3796 13.0964 12.1748 13.0964C12.97 13.0964 13.756 12.8747 14.397 12.4526L22 7" stroke="currentColor" strokeWidth="2.5"></path>
             </svg>
-            <span className="text-zinc-400 hover:text-brand-secondary transition-all duration-300 text-xs sm:text-sm truncate">
+            <span className="text-zinc-450 hover:text-brand-secondary transition-all duration-300 text-lg sm:text-xl truncate">
               hello.atuljamdar@gmail.com
             </span>
           </a>
