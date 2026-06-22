@@ -1,17 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
-import { Mail, Globe, MapPin, Sparkles, BookOpen, Copy, Check } from "lucide-react";
+import { Mail, MapPin, Copy, Check } from "lucide-react";
 import SectionReveal from "../ui/SectionReveal";
 
-// Dynamically import IconCloud with SSR disabled to prevent server-side hydration mismatches from canvas element random IDs
+// FIX 1: Skeleton placeholder while IconCloud JS loads — prevents layout shift
+function IconCloudSkeleton() {
+  return (
+    <div className="w-full h-full flex items-center justify-center min-h-[340px]">
+      <div className="w-48 h-48 rounded-full bg-zinc-800/60 animate-pulse" />
+    </div>
+  );
+}
+
+// Dynamically import IconCloud with SSR disabled — correct as-is, added loading fallback
 const IconCloud = dynamic(
   () => import("@/registry/magicui/icon-cloud").then((mod) => mod.IconCloud),
-  { ssr: false }
+  { ssr: false, loading: () => <IconCloudSkeleton /> }
 );
 
+// FIX 2: Move slugs + images outside component — these are constants, no reason
+// to recreate them on every render. This also prevents IconCloud from
+// re-fetching the CDN URLs unnecessarily on re-renders.
 const slugs = [
   "typescript",
   "javascript",
@@ -32,6 +44,10 @@ const slugs = [
   "github",
   "figma",
 ];
+
+const images = slugs.map(
+  (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
+);
 
 const PROCESS_ITEMS = [
   {
@@ -56,27 +72,27 @@ const PROCESS_ITEMS = [
   }
 ];
 
+const EMAIL = "hello.atuljamdar@gmail.com";
+
 export default function About() {
   const [copied, setCopied] = useState(false);
-  const email = "hello.atuljamdar@gmail.com";
+
+  // FIX 3: Respect OS reduced-motion preference across all animations
+  const shouldReduceMotion = useReducedMotion();
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email);
+    navigator.clipboard.writeText(EMAIL);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const images = slugs.map(
-    (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
-  );
-
   return (
     <section id="about" className="py-20 bg-black text-white relative z-10 overflow-hidden">
       <div className="max-w-[94rem] mx-auto px-4 sm:px-16 relative z-10">
-        
+
         {/* Bento Grid Summary Layout */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mx-auto w-full">
-          
+
           {/* Card 1: Tech Enthusiast (Icon Cloud sphere) */}
           <SectionReveal delay={0.2} className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/60 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 md:row-span-2 min-h-[560px] flex flex-col justify-between">
             <div className="h-full p-7 flex flex-col justify-between">
@@ -86,9 +102,10 @@ export default function About() {
                   Always excited to build cool stuff with the latest tech.
                 </h3>
               </div>
-              
+
               <div className="my-6 flex-grow relative flex items-center justify-center min-h-[340px]">
-                <div className="relative flex size-full items-center justify-center overflow-hidden scale-100 group-hover:scale-105 transition-transform duration-500">
+                {/* FIX 4: Guard scale transform with reduced-motion */}
+                <div className={`relative flex size-full items-center justify-center overflow-hidden scale-100 ${!shouldReduceMotion ? "group-hover:scale-105" : ""} transition-transform duration-500`}>
                   <IconCloud images={images} options={{ maxSpeed: 0.015, minSpeed: 0.005 }} />
                 </div>
               </div>
@@ -102,22 +119,25 @@ export default function About() {
                 <h3 className="font-extrabold text-zinc-100 text-2xl">Let's work together</h3>
                 <p className="text-sm text-zinc-500 mt-1.5">on your next project</p>
               </div>
-              
+
               <div className="flex justify-center items-center my-1.5">
-                <div className="h-20 w-20 rounded-full bg-brand-primary/80 border border-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/10 relative group-hover:scale-105 transition-transform duration-300">
-                  <div className="absolute inset-0 rounded-full bg-brand-primary/20 animate-ping" />
+                <div className={`h-20 w-20 rounded-full bg-brand-primary/80 border border-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/10 relative ${!shouldReduceMotion ? "group-hover:scale-105" : ""} transition-transform duration-300`}>
+                  {/* FIX 5: animate-ping is decorative and runs forever — disable for reduced-motion users */}
+                  {!shouldReduceMotion && (
+                    <div className="absolute inset-0 rounded-full bg-brand-primary/20 animate-ping" />
+                  )}
                   <span className="text-white font-black text-2xl tracking-tight relative z-10">JA</span>
                 </div>
               </div>
-              
+
               <div className="relative">
-                <button 
+                <button
                   onClick={handleCopyEmail}
                   className="flex items-center justify-between rounded-xl bg-zinc-900/60 border border-white/5 px-5 py-3.5 text-sm font-mono text-zinc-300 hover:bg-zinc-900 transition-all duration-350 w-full group/btn cursor-pointer"
                 >
                   <div className="flex items-center gap-2.5">
                     <Mail className="h-4.5 w-4.5 text-zinc-400" />
-                    <span className="truncate">{email}</span>
+                    <span className="truncate">{EMAIL}</span>
                   </div>
                   {copied ? (
                     <Check className="h-4.5 w-4.5 text-brand-success flex-shrink-0" />
@@ -132,10 +152,14 @@ export default function About() {
           {/* Card 3: Remote */}
           <SectionReveal delay={0.5} className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/60 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 h-80 flex flex-col justify-between">
             <div className="h-full p-7 flex flex-col justify-between relative overflow-hidden">
-              
-              {/* Glowing animated background globe */}
-              <div className="absolute right-[-50px] bottom-[-70px] w-72 h-72 opacity-25 group-hover:opacity-45 group-hover:scale-105 transition-all duration-500 pointer-events-none">
-                <svg viewBox="0 0 100 100" className="w-full h-full text-zinc-500 animate-spin" style={{ animationDuration: "20s" }}>
+
+              {/* FIX 6: Globe SVG spin disabled for reduced-motion users */}
+              <div className={`absolute right-[-50px] bottom-[-70px] w-72 h-72 opacity-25 group-hover:opacity-45 ${!shouldReduceMotion ? "group-hover:scale-105" : ""} transition-all duration-500 pointer-events-none`}>
+                <svg
+                  viewBox="0 0 100 100"
+                  className="w-full h-full text-zinc-500"
+                  style={shouldReduceMotion ? undefined : { animation: "spin 20s linear infinite" }}
+                >
                   <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3 3" fill="none" />
                   <ellipse cx="50" cy="50" rx="45" ry="15" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3 3" fill="none" />
                   <ellipse cx="50" cy="50" rx="15" ry="45" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3 3" fill="none" />
@@ -150,10 +174,10 @@ export default function About() {
                   I'm very flexible with time zone communications
                 </p>
               </div>
-              
+
               <div className="flex items-center gap-2 p-3.5 bg-black/40 border border-white/5 rounded-xl font-mono text-xs text-zinc-500 relative z-10 w-fit">
                 <MapPin className="w-4 h-4 text-brand-secondary flex-shrink-0" />
-                <span>GMT +5:30 // Berhampur (Berhampur dispatch)</span>
+                <span>GMT +5:30 // Pune, Maharashtra</span>
               </div>
             </div>
           </SectionReveal>
@@ -167,11 +191,11 @@ export default function About() {
                   Currently crafting a Business Portfolio for Client.
                 </h3>
               </div>
-              
+
               <div className="mt-6 flex gap-4 overflow-x-auto pb-3 w-full scrollbar-none snap-x snap-mandatory">
                 {PROCESS_ITEMS.map((item, idx) => (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     className="bg-zinc-900/60 border border-zinc-800/80 hover:border-brand-primary/20 rounded-2xl p-6 w-[250px] flex-shrink-0 flex flex-col justify-between transition-colors snap-start"
                   >
                     <h4 className="text-sm font-extrabold text-zinc-200 tracking-tight mb-2">{item.title}</h4>
