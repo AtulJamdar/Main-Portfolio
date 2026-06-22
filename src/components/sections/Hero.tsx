@@ -89,19 +89,19 @@ export default function Hero() {
             {/* FIX 6: animate-pulse on glow disabled for reduced-motion users */}
             <div
               className={cn(
-                "absolute -inset-2 bg-gradient-to-r from-brand-primary to-indigo-500 rounded-full blur-md opacity-40 group-hover/avatar:opacity-80 transition-all duration-300 scale-100 group-hover/avatar:scale-150",
+                "absolute -inset-2 bg-gradient-to-r from-brand-primary to-indigo-500 rounded-full blur-md opacity-40 group-hover/avatar:opacity-80 transition-all duration-300 scale-100 group-hover/avatar:scale-[3.0]",
                 !shouldReduceMotion && "animate-pulse"
               )}
             />
 
             {/* FIX 7: next/image instead of <img> — LCP element, so priority=true */}
-            <div className="relative w-12 h-12 z-10 transition-all duration-300 ease-out group-hover/avatar:scale-[2.2] group-hover/avatar:-translate-y-1 group-hover/avatar:shadow-2xl">
+            <div className="relative w-12 h-12 z-10 transition-all duration-300 ease-out group-hover/avatar:scale-[4.4] group-hover/avatar:-translate-y-2 group-hover/avatar:shadow-2xl">
               <Image
                 src="/atul-jamdar.jpeg"
                 alt="Atul Jamdar"
                 fill
                 priority
-                sizes="48px"
+                sizes="256px"
                 className="rounded-full border border-zinc-800 object-cover"
               />
             </div>
