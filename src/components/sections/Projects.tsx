@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowUpRight, Sparkles, ExternalLink } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import SectionReveal from "../ui/SectionReveal";
 
 function getTechIcon(tech: string) {
@@ -102,7 +103,7 @@ function getTechIcon(tech: string) {
       <svg className="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
         <rect width="24" height="24" rx="3" fill="#f7df1e" />
         <path d="M1.5 1.5h21v21h-21z" fill="#f7df1e" />
-        <path d="M11.64 18.26c-.36.6-.96.96-1.86.96-1.14 0-1.86-.6-1.86-1.74v-5.22h1.68v5.16c0 .42.18.6.54.6s.54-.18.54-.6v-5.16h1.68v6.9c0 .06-.06.06-.06.06h-.42zm7.62-1.5c0 1.68-1.02 2.46-2.58 2.46-1.26 0-2.1-.54-2.58-1.2l1.26-.78c.36.48.78.72 1.32.72.6 0 .96-.3.96-.84 0-.54-.36-.78-1.26-1.2l-.42-.18c-1.38-.6-1.92-1.38-1.92-2.4 0-1.44.96-2.34 2.4-2.34 1.08 0 1.86.42 2.34 1.08l-1.14.78c-.3-.36-.6-.54-1.14-.54-.54 0-.84.24-.84.66 0 .42.3.66.96.96l.48.24c1.44.66 2.1 1.32 2.1 2.58z" fill="black" />
+        <path d="M11.64 18.26c-.36.6-.96.96-1.86.96-1.14 0-1.86-.6-1.86-1.74v-5.22h1.68v5.16c0 .42.18.6.54.6s.54-.18.54-.6v-5.16h1.68v6.9c0 .06-.06.06-.06.06h-.42zm7.62-1.5c0 1.68-1.02 2.46-2.58 2.46-1.26 0-2.1-.54-2.58-1.2l1.26-.78c.36.48.78.72 1.32.72.6 0 .96-.3.96-.84 0-.54-.36-.78-1.26-1.2l-.42-.18c-1.38-.6-1.92-1.38-1.92-2.4 0-1.44.96-2.34 2.4-2.34 1.08 0 1.86.42 2.87.79l-.88 1.63c-.48-.33-1.14-.54-1.89-.54-.99 0-1.64.45-1.64 1.14 0 .66.45 1.05 1.83 1.58 2.22.84 3.24 1.7 3.24 3.36z" fill="black" />
       </svg>
     );
   }
@@ -130,13 +131,7 @@ const PROJECTS = [
       "Fast loading high-resolution image galleries",
       "Direct Google Maps integration for location reviews"
     ],
-    stack: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion"
-    ],
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     liveUrl: "https://mk-photography-orcin.vercel.app",
     gradientClass: "from-zinc-950 via-neutral-900 to-stone-950",
     themeColor: "text-amber-400",
@@ -157,13 +152,7 @@ const PROJECTS = [
       "Optimized lazy-loading media grid arrays",
       "Secure online booking deposit framework"
     ],
-    stack: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion"
-    ],
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     liveUrl: "https://tasveer-delta.vercel.app/",
     gradientClass: "from-black via-zinc-900 to-stone-900",
     themeColor: "text-gold-400",
@@ -184,13 +173,7 @@ const PROJECTS = [
       "Granular role-based user access controls",
       "Automatic board backups and data exports"
     ],
-    stack: [
-      "React.js",
-      "Node.js",
-      "Express.js",
-      "PostgreSQL",
-      "Socket.io"
-    ],
+    stack: ["React.js", "Node.js", "Express.js", "PostgreSQL", "Socket.io"],
     liveUrl: "https://syncflow-xnch.onrender.com/",
     gradientClass: "from-blue-950 to-cyan-900/60",
     themeColor: "text-purple-400",
@@ -211,15 +194,9 @@ const PROJECTS = [
       "Automated code complexity assessment metrics",
       "Direct slack notifications for review alerts"
     ],
-    stack: [
-      "Next.js",
-      "TypeScript",
-      "Redis",
-      "GitHub API",
-      "OpenAI"
-    ],
+    stack: ["Next.js", "TypeScript", "Redis", "GitHub API", "OpenAI"],
     liveUrl: "https://github.com/AtulJamdar/BuildWise",
-    gradientClass: "from-zinc-950 via-neutral-900 to-stone-950", // Standard fallback gradient
+    gradientClass: "from-zinc-950 via-neutral-900 to-stone-950",
     themeColor: "text-zinc-400",
     bulletColor: "text-zinc-500",
     imagePath: "/assets/Buildwise.png"
@@ -238,12 +215,7 @@ const PROJECTS = [
       "Real-time CSS sandbox live preview editors",
       "Export/import options for sharing styling profiles"
     ],
-    stack: [
-      "JavaScript",
-      "Chrome Manifest v3",
-      "DOM Sanitizer",
-      "Tailwind CSS"
-    ],
+    stack: ["JavaScript", "Chrome Manifest v3", "DOM Sanitizer", "Tailwind CSS"],
     liveUrl: "https://github.com/AtulJamdar/Web-Customizer",
     gradientClass: "from-purple-950 to-pink-955/40",
     themeColor: "text-emerald-400",
@@ -255,6 +227,9 @@ const PROJECTS = [
 export default function Projects() {
   const [activeIdx, setActiveIdx] = useState(0);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // FIX 1: Respect user's prefers-reduced-motion OS setting
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -268,7 +243,7 @@ export default function Projects() {
       },
       {
         root: null,
-        rootMargin: "-30% 0px -30% 0px", // Detect when a project card is in the center 40% of viewport
+        rootMargin: "-30% 0px -30% 0px",
         threshold: 0.3
       }
     );
@@ -285,7 +260,7 @@ export default function Projects() {
   return (
     <section id="projects" className="bg-black w-full text-white pt-20 md:pt-32 pb-16 overflow-visible relative z-10">
       <div className="pt-5 px-4 md:px-16 max-w-[94rem] mx-auto">
-        
+
         {/* Section Header */}
         <SectionReveal className="text-center mb-12 sm:mb-20">
           <h2 className="text-gray-300 uppercase tracking-wider font-medium text-xs md:text-sm mb-1 md:mb-2">
@@ -302,8 +277,8 @@ export default function Projects() {
         {/* Splits Showcase Container */}
         <SectionReveal delay={0.15} className="relative">
           <div className="flex flex-col md:flex-row items-stretch">
-            
-            {/* Left Column: Desktop scrolling project image cards over WHOLE height of the screen */}
+
+            {/* Left Column: Desktop scrolling project image cards */}
             <div className="hidden md:block w-1/2 pr-4">
               <div className="space-y-24">
                 {PROJECTS.map((project, index) => (
@@ -314,26 +289,29 @@ export default function Projects() {
                     className="min-h-screen py-24 flex items-center justify-center relative w-full"
                   >
                     <motion.div
-                      initial={{ opacity: 0, y: 60 }}
+                      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 60 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                      // FIX 2: Reduced from 0.65s — still smooth but snappier
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      // FIX 3: will-change only on the element that animates
+                      style={{ willChange: "transform, opacity" }}
                       className="w-[88%] ml-auto h-[580px]"
                     >
-                      <a 
-                        href={project.liveUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="w-full h-full block relative"
                       >
                         <div className="w-full h-full cursor-pointer relative group">
-                          
+
                           {/* Dynamic backdrop shadow blur */}
                           <div className="absolute -inset-1 bg-[#182235]/20 rounded-[32px] blur-xl opacity-0 group-hover:opacity-100 transition duration-500" />
-                          
-                          {/* Project Card (using whole screen space layout) */}
+
+                          {/* Project Card */}
                           <div className="w-full h-full bg-[#182235] overflow-hidden rounded-[32px] border border-white/10 hover:border-white/20 flex flex-col justify-between relative shadow-2xl p-8 hover:shadow-[#182235]/10 transition-all duration-500">
-                            
+
                             {/* Top Row: Info Title */}
                             <div className="flex justify-between items-start z-10 w-full pointer-events-none">
                               <h4 className="text-white text-xl sm:text-2xl font-bold max-w-[95%] font-sans tracking-tight leading-snug">
@@ -341,17 +319,21 @@ export default function Projects() {
                               </h4>
                             </div>
 
-                            {/* Static Image Mockup rendering the actual downloaded screenshot asset */}
+                            {/* FIX 4: next/image instead of <img> — lazy by default, auto WebP, no layout shift */}
                             <div className="flex-1 w-full flex items-center justify-center mt-12 relative rounded-2xl overflow-hidden pointer-events-none group-hover:scale-[1.03] transition-transform duration-500 ease-out origin-bottom">
-                              <img 
-                                src={project.imagePath} 
-                                alt={project.title} 
-                                className="object-contain w-full h-full max-h-[380px] p-2 filter drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]" 
+                              <Image
+                                src={project.imagePath}
+                                alt={project.title}
+                                fill
+                                // FIX 5: First project is above the fold — priority loads it eagerly (LCP fix)
+                                // All others are lazy-loaded automatically
+                                priority={index === 0}
+                                sizes="(max-width: 768px) 100vw, 44vw"
+                                className="object-contain p-2 drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
                               />
                             </div>
 
                           </div>
-
                         </div>
                       </a>
                     </motion.div>
@@ -360,12 +342,12 @@ export default function Projects() {
               </div>
             </div>
 
-            {/* MOBILE ONLY Stacked list (displays standard flow) */}
+            {/* MOBILE ONLY Stacked list */}
             <div className="w-full md:hidden pr-0 relative">
               <div className="space-y-8 my-8">
-                {PROJECTS.map((project) => (
-                  <div 
-                    key={project.id} 
+                {PROJECTS.map((project, index) => (
+                  <div
+                    key={project.id}
                     className="bg-[#182235] p-6 rounded-[24px] border border-white/10 flex flex-col justify-between space-y-4"
                   >
                     <div>
@@ -378,23 +360,27 @@ export default function Projects() {
                           <h3 className="text-xl font-bold text-white">{project.title}</h3>
                         </div>
                       </div>
-                      
-                      {/* Image inside mobile card */}
-                      <div className="w-full h-44 rounded-xl overflow-hidden bg-[#131b2d] flex items-center justify-center p-3 my-4 border border-white/10">
-                        <img 
-                          src={project.imagePath} 
-                          alt={project.title} 
-                          className="object-contain w-full h-full rounded-lg"
+
+                      {/* FIX 4 (mobile): next/image here too */}
+                      <div className="w-full h-44 rounded-xl overflow-hidden bg-[#131b2d] flex items-center justify-center p-3 my-4 border border-white/10 relative">
+                        <Image
+                          src={project.imagePath}
+                          alt={project.title}
+                          fill
+                          // FIX 5 (mobile): only eager-load the first card
+                          priority={index === 0}
+                          sizes="(max-width: 768px) 90vw, 0vw"
+                          className="object-contain rounded-lg p-2"
                         />
                       </div>
 
                       <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
                         {project.description}
                       </p>
-                      
+
                       <ul className="mt-4 space-y-2 text-[11px] text-zinc-300">
-                        {project.bullets.map((bullet, index) => (
-                          <li key={index} className="flex items-start gap-2">
+                        {project.bullets.map((bullet, idx) => (
+                          <li key={idx} className="flex items-start gap-2">
                             <span className="text-zinc-300 mt-0.5 font-bold font-mono">+</span>
                             <span>{bullet}</span>
                           </li>
@@ -411,9 +397,9 @@ export default function Projects() {
                       ))}
                     </div>
 
-                    <a 
-                      href={project.liveUrl} 
-                      target="_blank" 
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="mt-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-center text-xs font-bold font-mono flex items-center justify-center gap-1.5 transition-colors"
                     >
@@ -425,10 +411,8 @@ export default function Projects() {
               </div>
             </div>
 
-            {/* Right Column: Desktop STICKY descriptions panel (md:block) */}
+            {/* Right Column: Desktop STICKY descriptions panel */}
             <div className="w-full md:w-1/2 pl-4 relative hidden md:block">
-              
-              {/* DESKTOP ONLY: Sticky Descriptions panel that is perfectly left-aligned and uses smooth transition curves */}
               <div className="sticky top-0 h-screen flex flex-col justify-center items-start">
                 <div className="h-[520px] flex flex-col justify-center items-start max-w-2xl w-full px-8 text-left relative">
                   <AnimatePresence mode="wait">
@@ -437,10 +421,17 @@ export default function Projects() {
                       return (
                         <motion.div
                           key={project.id}
-                          initial={{ opacity: 0, x: 80 }}
+                          initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 80 }}
                           animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -40, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
-                          transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
+                          exit={{
+                            opacity: 0,
+                            x: shouldReduceMotion ? 0 : -40,
+                            transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] }
+                          }}
+                          // FIX 6: Was 2.0s — that's way too slow, dropped to 0.55s
+                          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                          // FIX 3: will-change on the animated panel
+                          style={{ willChange: "transform, opacity" }}
                           className="space-y-6 flex flex-col items-start justify-center w-full absolute inset-0 px-8 text-left"
                         >
                           {/* Heading marker & Title */}
@@ -459,11 +450,11 @@ export default function Projects() {
                           {/* Technical checklist bullets */}
                           <div className="space-y-4 w-full flex flex-col items-start">
                             {project.bullets.map((bullet, idx) => (
-                              <motion.div 
-                                key={idx} 
-                                initial={{ opacity: 0, x: 40 }}
+                              <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 40 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1], delay: idx * 0.05 }}
+                                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1], delay: idx * 0.04 }}
                                 className="flex items-start gap-3"
                               >
                                 <span className="text-zinc-300 mt-0.5 font-bold font-mono text-sm">+</span>
@@ -477,9 +468,9 @@ export default function Projects() {
                             {project.stack.map((tech, techIdx) => (
                               <motion.span
                                 key={tech}
-                                initial={{ opacity: 0, scale: 0.95 }}
+                                initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1], delay: techIdx * 0.05 }}
+                                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1], delay: techIdx * 0.04 }}
                                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/40 border border-white/10 text-xs font-sans font-medium text-white hover:border-white/20 transition-all duration-300 cursor-default"
                               >
                                 {getTechIcon(tech)}
@@ -494,7 +485,6 @@ export default function Projects() {
                   </AnimatePresence>
                 </div>
               </div>
-
             </div>
 
           </div>
