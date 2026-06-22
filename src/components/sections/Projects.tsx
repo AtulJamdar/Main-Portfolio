@@ -421,16 +421,28 @@ export default function Projects() {
                       return (
                         <motion.div
                           key={project.id}
-                          initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 80 }}
-                          animate={{ opacity: 1, x: 0 }}
+                          // Enter: glide in from right, fade up smoothly
+                          initial={{
+                            opacity: 0,
+                            x: shouldReduceMotion ? 0 : 48,
+                          }}
+                          animate={{
+                            opacity: 1,
+                            x: 0,
+                          }}
+                          // Exit: glide out to left, fade away at same pace — not rapid
                           exit={{
                             opacity: 0,
-                            x: shouldReduceMotion ? 0 : -40,
-                            transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] }
+                            x: shouldReduceMotion ? 0 : -32,
+                            transition: {
+                              duration: 0.55,
+                              ease: [0.4, 0, 0.6, 1], // smooth ease-in-out, not abrupt
+                            },
                           }}
-                          // FIX 6: Was 2.0s — that's way too slow, dropped to 0.55s
-                          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                          // FIX 3: will-change on the animated panel
+                          transition={{
+                            duration: 0.65,
+                            ease: [0.22, 1, 0.36, 1], // decelerates gently into rest
+                          }}
                           style={{ willChange: "transform, opacity" }}
                           className="space-y-6 flex flex-col items-start justify-center w-full absolute inset-0 px-8 text-left"
                         >
@@ -447,14 +459,21 @@ export default function Projects() {
                             {project.description}
                           </p>
 
-                          {/* Technical checklist bullets */}
+                          {/* Technical checklist bullets — staggered rise-in */}
                           <div className="space-y-4 w-full flex flex-col items-start">
                             {project.bullets.map((bullet, idx) => (
                               <motion.div
                                 key={idx}
-                                initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 40 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1], delay: idx * 0.04 }}
+                                initial={{
+                                  opacity: 0,
+                                  y: shouldReduceMotion ? 0 : 16,
+                                }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                  duration: 0.5,
+                                  ease: [0.22, 1, 0.36, 1],
+                                  delay: 0.1 + idx * 0.055,
+                                }}
                                 className="flex items-start gap-3"
                               >
                                 <span className="text-zinc-300 mt-0.5 font-bold font-mono text-sm">+</span>
@@ -463,14 +482,22 @@ export default function Projects() {
                             ))}
                           </div>
 
-                          {/* Tech stack row */}
+                          {/* Tech stack row — staggered fade-scale in */}
                           <div className="flex flex-wrap justify-start gap-3 mt-10 w-full">
                             {project.stack.map((tech, techIdx) => (
                               <motion.span
                                 key={tech}
-                                initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1], delay: techIdx * 0.04 }}
+                                initial={{
+                                  opacity: 0,
+                                  y: shouldReduceMotion ? 0 : 10,
+                                  scale: shouldReduceMotion ? 1 : 0.94,
+                                }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                transition={{
+                                  duration: 0.45,
+                                  ease: [0.22, 1, 0.36, 1],
+                                  delay: 0.15 + techIdx * 0.05,
+                                }}
                                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/40 border border-white/10 text-xs font-sans font-medium text-white hover:border-white/20 transition-all duration-300 cursor-default"
                               >
                                 {getTechIcon(tech)}
