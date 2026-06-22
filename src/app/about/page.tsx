@@ -5,10 +5,46 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ArrowLeft, Mail, Calendar, MapPin, Award, CheckCircle2, ChevronRight } from "lucide-react";
 
+const TABS = [
+  {
+    title: "Full-Stack Developer",
+    date: "June 2024 - Present",
+    subtitle: "MERN, TypeScript, Next.js",
+    color: "blue",
+    barTop: "40px",
+    barHeight: "115px"
+  },
+  {
+    title: "Freelance Consultant",
+    date: "2024 - Present",
+    subtitle: "SaaS Scaling & Audits",
+    color: "pink",
+    barTop: "155px",
+    barHeight: "115px"
+  },
+  {
+    title: "Achievements",
+    date: "Suryabharat 2026",
+    subtitle: "TechFest 🏆 Secured 2nd Place",
+    color: "amber",
+    barTop: "270px",
+    barHeight: "115px"
+  },
+  {
+    title: "Certifications",
+    date: "Completed",
+    subtitle: "freeCodeCamp Certifications",
+    color: "emerald",
+    barTop: "385px",
+    barHeight: "60px"
+  }
+];
+
 export default function AboutPage() {
   const [activeTab, setActiveTab] = useState(0);
   
   const sectionRefs = [
+    useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null)
@@ -190,121 +226,88 @@ export default function AboutPage() {
 
             {/* Mobile Tabs Navigation (scroller) */}
             <div className="lg:hidden mb-8 overflow-x-auto pb-2 flex gap-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {[
-                "Full-Stack Developer",
-                "Content Creator",
-                "Freelance Consultant"
-              ].map((tabName, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => scrollToSection(idx)}
-                  className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold whitespace-nowrap transition-all duration-300 cursor-pointer ${
-                    activeTab === idx
-                      ? "bg-purple-600 border border-purple-500 text-white shadow-md shadow-purple-500/10"
-                      : "bg-zinc-900 border border-white/5 text-zinc-450 hover:text-white hover:border-zinc-800"
-                  }`}
-                >
-                  {tabName}
-                </button>
-              ))}
+              {TABS.map((tab, idx) => {
+                let activeBg = "bg-blue-600 border-blue-500";
+                if (tab.color === "pink") activeBg = "bg-pink-600 border-pink-500";
+                if (tab.color === "amber") activeBg = "bg-amber-600 border-amber-500";
+                if (tab.color === "emerald") activeBg = "bg-emerald-600 border-emerald-500";
+                
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => scrollToSection(idx)}
+                    className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold whitespace-nowrap transition-all duration-300 cursor-pointer ${
+                      activeTab === idx
+                        ? `${activeBg} text-white shadow-md`
+                        : "bg-zinc-900 border border-white/5 text-zinc-400 hover:text-white hover:border-zinc-800"
+                    }`}
+                  >
+                    {tab.title}
+                  </button>
+                );
+              })}
             </div>
 
             <div className="relative flex flex-col lg:flex-row items-start">
               
               {/* Sticky Timeline Sidebar (Desktop only) */}
-              <div className="hidden lg:block lg:w-1/3 sticky top-32 h-[450px]">
-                <div className="h-full flex flex-col justify-between py-12 relative pl-1">
+              <div className="hidden lg:block lg:w-1/3 sticky top-32 h-[500px]">
+                <div className="h-full flex flex-col justify-between py-10 relative pl-1">
                   
                   {/* Glowing Vertical Timeline Bar */}
                   <div className="absolute left-[15px] top-[40px] bottom-[40px] w-0.5 bg-zinc-900" />
                   <div 
                     className="absolute left-[15px] w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 transition-all duration-500"
                     style={{ 
-                      top: activeTab === 0 ? "40px" : activeTab === 1 ? "180px" : "320px",
-                      height: activeTab === 0 ? "140px" : activeTab === 1 ? "140px" : "80px"
+                      top: TABS[activeTab]?.barTop || "40px",
+                      height: TABS[activeTab]?.barHeight || "115px"
                     }}
                   />
 
-                  {/* Tab 0 */}
-                  <button 
-                    onClick={() => scrollToSection(0)}
-                    className="relative pl-10 text-left group transition-all duration-300 cursor-pointer"
-                  >
-                    <div 
-                      className={`absolute left-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-500 ${
-                        activeTab === 0 
-                          ? "bg-blue-600 border-blue-500 scale-110 shadow-lg shadow-blue-500/20" 
-                          : "bg-zinc-950 border-zinc-800 group-hover:border-zinc-700"
-                      }`}
-                    >
-                      <div className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${activeTab === 0 ? "bg-white" : "bg-zinc-750 group-hover:bg-zinc-500"}`} />
-                    </div>
-                    <div className="space-y-0.5">
-                      <p className={`text-[10px] font-mono font-bold uppercase transition-colors duration-300 ${activeTab === 0 ? "text-blue-400" : "text-zinc-650"}`}>
-                        June 2024 - Present
-                      </p>
-                      <h3 className={`text-lg font-black transition-colors duration-300 ${activeTab === 0 ? "text-white" : "text-zinc-550"}`}>
-                        Full-Stack Developer
-                      </h3>
-                      <p className={`text-xs font-mono transition-colors duration-300 ${activeTab === 0 ? "text-zinc-400" : "text-zinc-650"}`}>
-                        MERN, TypeScript, Next.js
-                      </p>
-                    </div>
-                  </button>
+                  {TABS.map((tab, idx) => {
+                    const isActive = activeTab === idx;
+                    let colorClass = "text-blue-400";
+                    let bgClass = "bg-blue-600 border-blue-500 shadow-blue-500/20";
+                    if (tab.color === "pink") {
+                      colorClass = "text-pink-400";
+                      bgClass = "bg-pink-600 border-pink-500 shadow-pink-500/20";
+                    } else if (tab.color === "amber") {
+                      colorClass = "text-amber-400";
+                      bgClass = "bg-amber-600 border-amber-500 shadow-amber-500/20";
+                    } else if (tab.color === "emerald") {
+                      colorClass = "text-emerald-400";
+                      bgClass = "bg-emerald-600 border-emerald-500 shadow-emerald-500/20";
+                    }
 
-                  {/* Tab 1 */}
-                  <button 
-                    onClick={() => scrollToSection(1)}
-                    className="relative pl-10 text-left group transition-all duration-300 cursor-pointer"
-                  >
-                    <div 
-                      className={`absolute left-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-500 ${
-                        activeTab === 1 
-                          ? "bg-purple-600 border-purple-500 scale-110 shadow-lg shadow-purple-500/20" 
-                          : "bg-zinc-950 border-zinc-800 group-hover:border-zinc-700"
-                      }`}
-                    >
-                      <div className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${activeTab === 1 ? "bg-white" : "bg-zinc-750 group-hover:bg-zinc-500"}`} />
-                    </div>
-                    <div className="space-y-0.5">
-                      <p className={`text-[10px] font-mono font-bold uppercase transition-colors duration-300 ${activeTab === 1 ? "text-purple-400" : "text-zinc-650"}`}>
-                        2024 - Present
-                      </p>
-                      <h3 className={`text-lg font-black transition-colors duration-300 ${activeTab === 1 ? "text-white" : "text-zinc-550"}`}>
-                        Content Creator
-                      </h3>
-                      <p className={`text-xs font-mono transition-colors duration-300 ${activeTab === 1 ? "text-zinc-400" : "text-zinc-650"}`}>
-                        Teardowns & Dev Tips
-                      </p>
-                    </div>
-                  </button>
-
-                  {/* Tab 2 */}
-                  <button 
-                    onClick={() => scrollToSection(2)}
-                    className="relative pl-10 text-left group transition-all duration-300 cursor-pointer"
-                  >
-                    <div 
-                      className={`absolute left-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-500 ${
-                        activeTab === 2 
-                          ? "bg-pink-600 border-pink-500 scale-110 shadow-lg shadow-pink-500/20" 
-                          : "bg-zinc-950 border-zinc-800 group-hover:border-zinc-700"
-                      }`}
-                    >
-                      <div className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${activeTab === 2 ? "bg-white" : "bg-zinc-750 group-hover:bg-zinc-500"}`} />
-                    </div>
-                    <div className="space-y-0.5">
-                      <p className={`text-[10px] font-mono font-bold uppercase transition-colors duration-300 ${activeTab === 2 ? "text-pink-400" : "text-zinc-650"}`}>
-                        2024 - Present
-                      </p>
-                      <h3 className={`text-lg font-black transition-colors duration-300 ${activeTab === 2 ? "text-white" : "text-zinc-550"}`}>
-                        Freelance Consultant
-                      </h3>
-                      <p className={`text-xs font-mono transition-colors duration-300 ${activeTab === 2 ? "text-zinc-400" : "text-zinc-650"}`}>
-                        SaaS Scaling & Audits
-                      </p>
-                    </div>
-                  </button>
+                    return (
+                      <button 
+                        key={idx}
+                        onClick={() => scrollToSection(idx)}
+                        className="relative pl-10 text-left group transition-all duration-300 cursor-pointer"
+                      >
+                        <div 
+                          className={`absolute left-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-500 ${
+                            isActive 
+                              ? `${bgClass} scale-110 shadow-lg` 
+                              : "bg-zinc-950 border-zinc-800 group-hover:border-zinc-700"
+                          }`}
+                        >
+                          <div className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${isActive ? "bg-white" : "bg-zinc-700 group-hover:bg-zinc-500"}`} />
+                        </div>
+                        <div className="space-y-0.5">
+                          <p className={`text-[10px] font-mono font-bold uppercase transition-colors duration-300 ${isActive ? colorClass : "text-zinc-500"}`}>
+                            {tab.date}
+                          </p>
+                          <h3 className={`text-lg font-black transition-colors duration-300 ${isActive ? "text-white" : "text-zinc-500"}`}>
+                            {tab.title}
+                          </h3>
+                          <p className={`text-xs font-mono transition-colors duration-300 ${isActive ? "text-zinc-450" : "text-zinc-650"}`}>
+                            {tab.subtitle}
+                          </p>
+                        </div>
+                      </button>
+                    );
+                  })}
 
                 </div>
               </div>
@@ -354,51 +357,11 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                {/* Section 2: Content Creator */}
+                {/* Section 2: Freelance Consultant */}
                 <div 
                   ref={sectionRefs[1]}
                   data-tab-index={1}
                   className="py-12 border-b border-zinc-900 min-h-[50vh] flex flex-col justify-center"
-                >
-                  <div className="lg:hidden mb-6 space-y-1 relative pl-8 border-l-2 border-purple-500">
-                    <div className="absolute left-0 top-0.5 w-3.5 h-3.5 bg-purple-500 rounded-full -translate-x-1/2" />
-                    <p className="text-zinc-500 font-mono text-[9px] font-bold uppercase">2024 - Present</p>
-                    <h3 className="text-xl font-extrabold text-white">Content Creator</h3>
-                  </div>
-
-                  <div className="space-y-6">
-                    <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
-                      I break down how I ship high-throughput digital products, sharing build-in-public updates, technical walkthroughs, and lessons from my active builds to help other software developers level up.
-                    </p>
-
-                    <div className="space-y-4">
-                      {[
-                        "Published deep-dive systems teardowns detailing async Redis queues, serverless cache parameters, and vector databases.",
-                        "Shared behind-the-scenes engineering logs covering WebGL particle shaders, responsive layout architectures, and Core Web Vitals optimizations.",
-                        "Write actionable, daily tips on generic TypeScript schema validations, atomic React hooks, and Tailwind CSS rules drawn from active workspaces."
-                      ].map((bullet, idx) => (
-                        <div key={idx} className="flex items-start gap-3">
-                          <span className="text-purple-500 mt-1 font-bold font-mono text-sm leading-none flex-shrink-0">•</span>
-                          <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">{bullet}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="pt-4 flex flex-wrap gap-2">
-                      {["Case Studies", "Build in Public", "Technical Writing", "Next.js", "Framer Motion", "TypeScript", "Performance Auditing"].map((item) => (
-                        <span key={item} className="px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-xs text-zinc-450 font-medium font-mono hover:text-white transition-colors duration-200">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Section 3: Freelance Consultant */}
-                <div 
-                  ref={sectionRefs[2]}
-                  data-tab-index={2}
-                  className="py-12 min-h-[50vh] flex flex-col justify-center"
                 >
                   <div className="lg:hidden mb-6 space-y-1 relative pl-8 border-l-2 border-pink-500">
                     <div className="absolute left-0 top-0.5 w-3.5 h-3.5 bg-pink-500 rounded-full -translate-x-1/2" />
@@ -431,6 +394,191 @@ export default function AboutPage() {
                         </span>
                       ))}
                     </div>
+                  </div>
+                </div>
+
+                {/* Section 3: Achievements */}
+                <div 
+                  ref={sectionRefs[2]}
+                  data-tab-index={2}
+                  className="py-12 border-b border-zinc-900 min-h-[50vh] flex flex-col justify-center"
+                >
+                  <div className="lg:hidden mb-6 space-y-1 relative pl-8 border-l-2 border-amber-500">
+                    <div className="absolute left-0 top-0.5 w-3.5 h-3.5 bg-amber-500 rounded-full -translate-x-1/2" />
+                    <p className="text-zinc-500 font-mono text-[9px] font-bold uppercase">Suryabharat TechFest 2026</p>
+                    <h3 className="text-xl font-extrabold text-white">Achievements</h3>
+                  </div>
+
+                  <div className="flex flex-col xl:flex-row gap-8 items-start">
+                    <div className="flex-1 space-y-6">
+                      <div className="space-y-2">
+                        <span className="text-xs font-mono font-bold text-amber-400 block uppercase tracking-wider">
+                          Suryabharat TechFest 2026 — 2nd Place
+                        </span>
+                        <h4 className="text-xl sm:text-2xl font-black text-white leading-tight">
+                          Built. Presented. Recognized. 🏆
+                        </h4>
+                      </div>
+
+                      <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                        I recently participated in the MindSweeper event at Suryadatta Group of Institutes (Est. 1999) during Suryabharat TechFest 2026, where I secured 2nd place.
+                      </p>
+                      <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                        I presented my project <strong>BuildWise</strong> — focused on solving real-world problems with a practical and scalable approach.
+                      </p>
+
+                      <div className="space-y-4">
+                        <p className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+                          Key Takeaways & Experience:
+                        </p>
+                        {[
+                          "Presenting in a competitive environment",
+                          "Explaining technical decisions under pressure",
+                          "Getting feedback from experienced evaluators",
+                          "This pushed me to think beyond just \"building features\" and focus more on clarity, problem-solving, and execution."
+                        ].map((bullet, idx) => (
+                          <div key={idx} className="flex items-start gap-3">
+                            <span className="text-amber-500 mt-1 font-bold font-mono text-sm leading-none flex-shrink-0">•</span>
+                            <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">{bullet}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      <p className="text-zinc-300 text-sm sm:text-base font-medium italic">
+                        Grateful for the experience and the learning that came with it. 🚀
+                      </p>
+                    </div>
+
+                    {/* Achievement Image Frame */}
+                    <div className="w-full xl:w-[320px] shrink-0">
+                      <div className="group relative rounded-2xl overflow-hidden bg-zinc-950 border border-white/10 hover:border-amber-500/30 transition-all duration-500 shadow-xl">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent z-10 opacity-60 pointer-events-none" />
+                        <img 
+                          src="/assets/Achivement_1.jpeg" 
+                          alt="MindSweeper Award 2nd Place" 
+                          className="w-full object-cover rounded-2xl transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section 4: Certifications */}
+                <div 
+                  ref={sectionRefs[3]}
+                  data-tab-index={3}
+                  className="py-12 min-h-[50vh] flex flex-col justify-center"
+                >
+                  <div className="lg:hidden mb-6 space-y-1 relative pl-8 border-l-2 border-emerald-500">
+                    <div className="absolute left-0 top-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full -translate-x-1/2" />
+                    <p className="text-zinc-500 font-mono text-[9px] font-bold uppercase">freeCodeCamp</p>
+                    <h3 className="text-xl font-extrabold text-white">Certifications</h3>
+                  </div>
+
+                  <div className="space-y-16">
+                    
+                    {/* Certificate 1: Responsive Web Design */}
+                    <div className="flex flex-col xl:flex-row gap-8 items-start">
+                      <div className="flex-1 space-y-6">
+                        <div className="space-y-2">
+                          <span className="text-xs font-mono font-bold text-emerald-400 block uppercase tracking-wider">
+                            freeCodeCamp Certification
+                          </span>
+                          <h4 className="text-xl sm:text-2xl font-black text-white leading-tight">
+                            Responsive Web Design 🎉
+                          </h4>
+                        </div>
+
+                        <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                          Just completed the Responsive Web Design Certification from freeCodeCamp. I already work with HTML and CSS, but I decided to go through the full course again to refresh my fundamentals and clear my concepts properly.
+                        </p>
+
+                        <div className="space-y-3">
+                          <p className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+                            Skills Revised & Strengthened:
+                          </p>
+                          {[
+                            "Semantic HTML for structured documents",
+                            "Accessibility basics (WCAG guidelines, ARIA attributes)",
+                            "Flexbox and CSS Grid layout techniques",
+                            "Media queries for responsive, fluid breakpoints",
+                            "Writing clean, organized, and structured style components"
+                          ].map((bullet, idx) => (
+                            <div key={idx} className="flex items-start gap-2">
+                              <span className="text-emerald-500 mt-1 font-bold text-xs">✔</span>
+                              <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">{bullet}</p>
+                            </div>
+                          ))}
+                        </div>
+
+                        <p className="text-zinc-300 text-sm sm:text-base font-medium italic">
+                          It was a great revision and a good reminder that strong basics are very important in development. Always learning. Always improving. 🚀
+                        </p>
+                      </div>
+
+                      {/* Certificate Image Frame */}
+                      <div className="w-full xl:w-[320px] shrink-0">
+                        <div className="group relative rounded-2xl overflow-hidden bg-zinc-950 border border-white/10 hover:border-emerald-500/30 transition-all duration-500 shadow-xl">
+                          <img 
+                            src="/assets/Certificate_1.png" 
+                            alt="Responsive Web Design Certification" 
+                            className="w-full object-cover rounded-2xl transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Certificate 2: Relational Database V8 */}
+                    <div className="flex flex-col xl:flex-row gap-8 items-start border-t border-zinc-900 pt-12">
+                      <div className="flex-1 space-y-6">
+                        <div className="space-y-2">
+                          <span className="text-xs font-mono font-bold text-emerald-400 block uppercase tracking-wider">
+                            freeCodeCamp Certification
+                          </span>
+                          <h4 className="text-xl sm:text-2xl font-black text-white leading-tight">
+                            Relational Database V8 🛠️
+                          </h4>
+                        </div>
+
+                        <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                          Revisited relational databases recently through the Relational Database Certification from freeCodeCamp — not just for the certificate, but to strengthen backend fundamentals through structured practice. While working on full-stack projects, I realized that solid database design directly impacts scalability, query performance, and application reliability.
+                        </p>
+
+                        <div className="space-y-3">
+                          <p className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+                            Concepts Solidified:
+                          </p>
+                          {[
+                            "Writing optimized SQL queries instead of just \"working queries\"",
+                            "Understanding normalization (1NF, 2NF, 3NF) and reducing redundant data",
+                            "Designing proper relationships (one-to-one, one-to-many, many-to-many) between tables",
+                            "Using constraints effectively for data integrity",
+                            "Thinking about backend structure before writing APIs"
+                          ].map((bullet, idx) => (
+                            <div key={idx} className="flex items-start gap-2">
+                              <span className="text-emerald-500 mt-1 font-bold text-xs">✔</span>
+                              <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">{bullet}</p>
+                            </div>
+                          ))}
+                        </div>
+
+                        <p className="text-zinc-300 text-sm sm:text-base font-medium italic">
+                          One thing I’ve learned: Frameworks change fast, but strong fundamentals stay valuable. Continuing to improve step by step. 🚀
+                        </p>
+                      </div>
+
+                      {/* Certificate Image Frame */}
+                      <div className="w-full xl:w-[320px] shrink-0">
+                        <div className="group relative rounded-2xl overflow-hidden bg-zinc-950 border border-white/10 hover:border-emerald-500/30 transition-all duration-500 shadow-xl">
+                          <img 
+                            src="/assets/Certificate_2.png" 
+                            alt="Relational Database Certification" 
+                            className="w-full object-cover rounded-2xl transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 
