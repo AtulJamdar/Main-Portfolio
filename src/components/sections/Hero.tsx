@@ -18,7 +18,7 @@ const StarsBackgroundDemo = memo(function StarsBackgroundDemo() {
 
   return (
     <StarsBackground
-      starColor={resolvedTheme === "dark" ? "#FFF" : "#000"}
+      starColor="#FFF"
       starDensity={0.002}
       speed={3.0}
       className={cn(

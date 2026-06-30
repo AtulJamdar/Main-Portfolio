@@ -15,17 +15,6 @@ export default function CaseStudiesPage() {
 
       <main className="relative z-10 flex-1 pt-32 pb-24 max-w-7xl mx-auto px-6 md:px-12 w-full space-y-16">
         
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2">
-          <a
-            href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-500 hover:text-white transition-colors uppercase"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            &gt; Back to Core System
-          </a>
-        </div>
-
         {/* Page Header */}
         <SectionReveal className="space-y-4">
           <span className="text-[10px] font-bold font-mono tracking-widest text-brand-primary uppercase">
