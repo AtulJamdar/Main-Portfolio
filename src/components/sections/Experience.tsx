@@ -70,7 +70,7 @@ export default function Experience() {
                     {(isHov) => (
                       <>
                         <AnimatedCalendar className="w-4 h-4 text-purple-400" isHovered={isHov} />
-                        <span>June 2024 — December 2024</span>
+                        <span>Nov 2025 — May 2026</span>
                       </>
                     )}
                   </HoverContainer>
