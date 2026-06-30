@@ -72,6 +72,46 @@ function getTechIcon(tech: string) {
       </svg>
     );
   }
+  if (norm.includes("mongo")) {
+    return (
+      <svg className="w-5 h-5 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2c3 4 4 7.5 4 10.5a4 4 0 0 1-8 0C8 9.5 9 6 12 2z" />
+        <path d="M12 13v9" />
+      </svg>
+    );
+  }
+  if (norm.includes("jwt")) {
+    return (
+      <svg className="w-5 h-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="11" width="18" height="10" rx="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </svg>
+    );
+  }
+  if (norm.includes("nodemailer") || norm.includes("mail")) {
+    return (
+      <svg className="w-5 h-5 text-sky-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="m2 7 10 7 10-7" />
+      </svg>
+    );
+  }
+  if (norm.includes("pdfkit") || norm.includes("pdf")) {
+    return (
+      <svg className="w-5 h-5 text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+      </svg>
+    );
+  }
+  if (norm.includes("cron")) {
+    return (
+      <svg className="w-5 h-5 text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    );
+  }
   if (norm.includes("socket")) {
     return (
       <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -117,6 +157,48 @@ function getTechIcon(tech: string) {
 }
 
 const PROJECTS = [
+  {
+    id: "bookmyslot",
+    title: "BookMySlot",
+    subtitle: "Multi-Tenant Appointment Booking Platform",
+    description:
+      "A premium multi-tenant scheduling platform built for local Indian service businesses, featuring database-level tenant isolation, dynamic slot generation, and a real-time owner dashboard wrapped in a polished dark-mode interface.",
+    bullets: [
+      "JWT claim-based tenant isolation across database and middleware layers",
+      "Dynamic slot engine factoring staff hours and buffer times",
+      "Owner dashboard with revenue and cancellation rate analytics",
+      "Unified customer portal for provider discovery and booking",
+      "Asynchronous Nodemailer alerts for confirmations and reminders",
+      "Modular route-controller-service backend architecture"
+    ],
+    stack: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT"],
+    liveUrl: "https://book-my-slot-eight.vercel.app/",
+    gradientClass: "from-emerald-950 via-neutral-900 to-stone-950",
+    themeColor: "text-emerald-400",
+    bulletColor: "text-emerald-500",
+    imagePath: "/assets/bookmyslot.png"
+  },
+  {
+    id: "freelanceflow",
+    title: "FreelanceFlow",
+    subtitle: "Client Portal & Invoicing System",
+    description:
+      "A backend-focused MERN client portal that streamlines freelancer workflows, automating PDF invoice generation, payment tracking, and overdue reminders through a document-first, API-driven architecture.",
+    bullets: [
+      "Modular Express route-controller-service backend structure",
+      "Auto-sequenced PDF invoice generation engine using PDFKit",
+      "node-cron scheduled jobs for automated overdue reminders",
+      "Document-first workflow with PRDs and OpenAPI specs",
+      "Centralized client, project, and milestone tracking",
+      "Axios-driven React dashboard for payments and analytics"
+    ],
+    stack: ["Node.js", "Express.js", "MongoDB", "PDFKit", "node-cron"],
+    liveUrl: "https://freelance-flow-ruddy-xi.vercel.app/",
+    gradientClass: "from-indigo-950 via-neutral-900 to-stone-950",
+    themeColor: "text-indigo-400",
+    bulletColor: "text-indigo-500",
+    imagePath: "/assets/freelanceflow.png"
+  },
   {
     id: "mkphotography",
     title: "MK Photography",
@@ -180,6 +262,7 @@ const PROJECTS = [
     bulletColor: "text-purple-500",
     imagePath: "/assets/Syncflow.png"
   },
+  
   {
     id: "buildwise",
     title: "BuildWise",
