@@ -94,7 +94,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mx-auto w-full">
 
           {/* Card 1: Tech Enthusiast (Icon Cloud sphere) */}
-          <SectionReveal delay={0.2} className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/60 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 md:row-span-2 min-h-[560px] flex flex-col justify-between">
+          <SectionReveal delay={0.2} className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/90 shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 md:row-span-2 min-h-[560px] flex flex-col justify-between">
             <div className="h-full p-7 flex flex-col justify-between">
               <div>
                 <p className="text-xs text-zinc-550 font-mono tracking-tight mb-2">Tech Enthusiast</p>
@@ -113,7 +113,7 @@ export default function About() {
           </SectionReveal>
 
           {/* Card 2: Let's work together */}
-          <SectionReveal delay={0.35} className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/60 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 h-80 flex flex-col justify-between">
+          <SectionReveal delay={0.35} className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/90 shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 h-80 flex flex-col justify-between">
             <div className="h-full p-7 flex flex-col justify-between">
               <div>
                 <h3 className="font-extrabold text-zinc-100 text-2xl">Let's work together</h3>
@@ -150,7 +150,7 @@ export default function About() {
           </SectionReveal>
 
           {/* Card 3: Remote */}
-          <SectionReveal delay={0.5} className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/60 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 h-80 flex flex-col justify-between">
+          <SectionReveal delay={0.5} className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/90 shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-4 h-80 flex flex-col justify-between">
             <div className="h-full p-7 flex flex-col justify-between relative overflow-hidden">
 
               {/* FIX 6: Globe SVG spin disabled for reduced-motion users */}
@@ -183,7 +183,7 @@ export default function About() {
           </SectionReveal>
 
           {/* Card 4: Behind the Scenes (Process tracker list) */}
-          <SectionReveal delay={0.65} className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/60 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-8 flex flex-col justify-between min-h-[280px]">
+          <SectionReveal delay={0.65} className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/90 shadow-md transition-all duration-300 hover:border-purple-500/20 hover:shadow-purple-500/5 md:col-span-8 flex flex-col justify-between min-h-[280px]">
             <div className="h-full p-7 flex flex-col justify-between w-full">
               <div>
                 <p className="text-xs text-zinc-550 font-mono tracking-tight mb-2">Behind the Scenes</p>

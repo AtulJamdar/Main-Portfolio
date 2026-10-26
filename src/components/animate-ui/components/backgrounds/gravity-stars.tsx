@@ -56,6 +56,7 @@ function GravityStarsBackground({
   const starsRef = React.useRef<Particle[]>([]);
   const mouseRef = React.useRef<{ x: number; y: number }>({ x: -10000, y: -10000 });
   const [isReady, setIsReady] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(true);
   const [dpr, setDpr] = React.useState(1);
   const [canvasSize, setCanvasSize] = React.useState({
     width: 800,
@@ -337,13 +338,30 @@ function GravityStarsBackground({
   ]);
 
   React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, { threshold: 0 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!isVisible) {
+      if (animRef.current) {
+        cancelAnimationFrame(animRef.current);
+        animRef.current = null;
+      }
+      return;
+    }
     if (animRef.current) cancelAnimationFrame(animRef.current);
     animRef.current = requestAnimationFrame(animate);
     return () => {
       if (animRef.current) cancelAnimationFrame(animRef.current);
       animRef.current = null;
     };
-  }, [animate]);
+  }, [animate, isVisible]);
 
   React.useEffect(() => {
     const handleGlobalMouseMove = (e: MouseEvent) => {

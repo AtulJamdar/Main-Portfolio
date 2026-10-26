@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Cloud } from "react-icon-cloud";
 
 export interface DynamicCloudProps {
@@ -35,14 +35,39 @@ export const cloudProps = {
 };
 
 export function IconCloud({ images, options }: DynamicCloudProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const mergedOptions = { ...cloudProps.options, ...options };
+
   return (
-    <Cloud {...cloudProps} options={mergedOptions}>
-      {images?.map((image, index) => (
-        <a key={index} href="#" onClick={(e) => e.preventDefault()}>
-          <img src={image} alt="icon" width={42} height={42} />
-        </a>
-      ))}
-    </Cloud>
+    <div ref={containerRef} className="w-full h-full flex items-center justify-center">
+      {isVisible ? (
+        <Cloud {...cloudProps} options={mergedOptions}>
+          {images?.map((image, index) => (
+            <a key={index} href="#" onClick={(e) => e.preventDefault()}>
+              <img src={image} alt="icon" width={42} height={42} />
+            </a>
+          ))}
+        </Cloud>
+      ) : (
+        <div className="w-48 h-48 rounded-full bg-zinc-800/40" />
+      )}
+    </div>
   );
 }

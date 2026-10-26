@@ -43,6 +43,7 @@ export const StarsBackground = React.forwardRef<HTMLDivElement, StarsBackgroundP
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [isReady, setIsReady] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
 
     // Motion values for smooth cursor parallax
     const mouseX = useMotionValue(0);
@@ -147,8 +148,30 @@ export const StarsBackground = React.forwardRef<HTMLDivElement, StarsBackgroundP
       return () => window.removeEventListener("mousemove", handleMouseMove);
     }, [mouseX, mouseY]);
 
+    // IntersectionObserver to pause requestAnimationFrame when Hero section is off-screen
+    useEffect(() => {
+      const container = containerRef.current || (ref && "current" in ref ? ref.current : null);
+      if (!container || typeof IntersectionObserver === "undefined") return;
+
+      const target = container.closest("section") || container;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsVisible(entry.isIntersecting);
+        },
+        { threshold: 0 }
+      );
+
+      observer.observe(target);
+
+      return () => {
+        observer.disconnect();
+      };
+    }, [ref]);
+
     // Main animation loop
     useEffect(() => {
+      if (!isVisible) return;
+
       let animId: number;
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext("2d");
@@ -222,7 +245,7 @@ export const StarsBackground = React.forwardRef<HTMLDivElement, StarsBackgroundP
         animate(timestamp);
       });
       return () => cancelAnimationFrame(animId);
-    }, [canvasSize, starColor, factor, speed, smoothMouseX, smoothMouseY, dpr]);
+    }, [isVisible, canvasSize, starColor, factor, speed, smoothMouseX, smoothMouseY, dpr]);
 
     return (
       <div

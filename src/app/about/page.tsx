@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Mail, Calendar, MapPin, Award, CheckCircle2 } from "lucide-react";
@@ -103,15 +104,12 @@ export default function AboutPage() {
               <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-pink-500 rounded-3xl blur-xl opacity-40 animate-pulse" />
               
               <div className="relative w-80 h-80 sm:w-96 sm:h-96 rounded-3xl overflow-hidden border border-zinc-800 bg-zinc-950 shadow-2xl">
-                <img
-                  src="/atul-jamdar.jpeg"
+                <Image
+                  src="/atul-jamdar.webp"
                   alt="Atul Jamdar"
+                  width={384}
+                  height={384}
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                    const fallback = e.currentTarget.parentElement?.querySelector(".fallback-avatar");
-                    if (fallback) fallback.classList.remove("hidden");
-                  }}
                 />
                 {/* Fallback avatar block */}
                 <div className="fallback-avatar hidden absolute inset-0 flex items-center justify-center bg-zinc-900 text-white font-mono font-bold text-5xl">

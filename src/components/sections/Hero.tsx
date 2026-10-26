@@ -19,7 +19,7 @@ const StarsBackgroundDemo = memo(function StarsBackgroundDemo() {
   return (
     <StarsBackground
       starColor="#FFF"
-      starDensity={0.002}
+      starDensity={0.0004}
       speed={3.0}
       className={cn(
         "absolute inset-0 flex items-center justify-center rounded-xl"
@@ -97,7 +97,7 @@ export default function Hero() {
             {/* FIX 7: next/image instead of <img> — LCP element, so priority=true */}
             <div className="relative w-12 h-12 z-10 transition-all duration-300 ease-out group-hover/avatar:scale-[4.4] group-hover/avatar:-translate-y-2 group-hover/avatar:shadow-2xl">
               <Image
-                src="/atul-jamdar.jpeg"
+                src="/atul-jamdar.webp"
                 alt="Atul Jamdar"
                 fill
                 priority

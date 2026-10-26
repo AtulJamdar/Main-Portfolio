@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
@@ -90,60 +90,70 @@ function getTechIcon(tech: string) {
   }
   if (norm.includes("nodemailer") || norm.includes("mail")) {
     return (
-      <svg className="w-5 h-5 text-sky-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg className="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="4" width="20" height="16" rx="2" />
-        <path d="m2 7 10 7 10-7" />
-      </svg>
-    );
-  }
-  if (norm.includes("pdfkit") || norm.includes("pdf")) {
-    return (
-      <svg className="w-5 h-5 text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <polyline points="14 2 14 8 20 8" />
-      </svg>
-    );
-  }
-  if (norm.includes("cron")) {
-    return (
-      <svg className="w-5 h-5 text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
+        <path d="M22 6L12 13L2 6" />
       </svg>
     );
   }
   if (norm.includes("socket")) {
     return (
-      <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+      <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.2c4.308 0 7.8 3.492 7.8 7.8s-3.492 7.8-7.8 7.8-7.8-3.492-7.8-7.8 3.492-7.8 7.8-7.8zm0 2.4c-2.982 0-5.4 2.418-5.4 5.4s2.418 5.4 5.4 5.4 5.4-2.418 5.4-5.4-2.418-5.4-5.4-5.4z" />
       </svg>
     );
   }
   if (norm.includes("redis")) {
     return (
       <svg className="w-5 h-5 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="2" width="20" height="8" rx="2" />
-        <rect x="2" y="14" width="20" height="8" rx="2" />
-        <line x1="6" y1="6" x2="6.01" y2="6" />
-        <line x1="6" y1="18" x2="6.01" y2="18" />
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+        <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
       </svg>
     );
   }
-  if (norm.includes("openai") || norm.includes("api") || norm.includes("github")) {
+  if (norm.includes("github")) {
     return (
-      <svg className="w-5 h-5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="4" y="4" width="16" height="16" rx="2" />
-        <rect x="9" y="9" width="6" height="6" />
-        <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3" />
+      <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+        <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
       </svg>
     );
   }
-  if (norm.includes("javascript") || norm === "js") {
+  if (norm.includes("openai") || norm.includes("ai")) {
     return (
-      <svg className="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
-        <rect width="24" height="24" rx="3" fill="#f7df1e" />
-        <path d="M1.5 1.5h21v21h-21z" fill="#f7df1e" />
-        <path d="M11.64 18.26c-.36.6-.96.96-1.86.96-1.14 0-1.86-.6-1.86-1.74v-5.22h1.68v5.16c0 .42.18.6.54.6s.54-.18.54-.6v-5.16h1.68v6.9c0 .06-.06.06-.06.06h-.42zm7.62-1.5c0 1.68-1.02 2.46-2.58 2.46-1.26 0-2.1-.54-2.58-1.2l1.26-.78c.36.48.78.72 1.32.72.6 0 .96-.3.96-.84 0-.54-.36-.78-1.26-1.2l-.42-.18c-1.38-.6-1.92-1.38-1.92-2.4 0-1.44.96-2.34 2.4-2.34 1.08 0 1.86.42 2.87.79l-.88 1.63c-.48-.33-1.14-.54-1.89-.54-.99 0-1.64.45-1.64 1.14 0 .66.45 1.05 1.83 1.58 2.22.84 3.24 1.7 3.24 3.36z" fill="black" />
+      <svg className="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    );
+  }
+  if (norm.includes("pdf")) {
+    return (
+      <svg className="w-5 h-5 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
+        <polyline points="10 9 9 9 8 9" />
+      </svg>
+    );
+  }
+  if (norm.includes("cron")) {
+    return (
+      <svg className="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    );
+  }
+  if (norm.includes("chrome")) {
+    return (
+      <svg className="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="4" />
+        <line x1="21.17" y1="8" x2="12" y2="8" />
+        <line x1="3.95" y1="6.06" x2="8.54" y2="14" />
+        <line x1="10.88" y1="21.94" x2="15.46" y2="14" />
       </svg>
     );
   }
@@ -197,7 +207,7 @@ const PROJECTS = [
     gradientClass: "from-indigo-950 via-neutral-900 to-stone-950",
     themeColor: "text-indigo-400",
     bulletColor: "text-indigo-500",
-    imagePath: "/assets/freelanceflow.png"
+    imagePath: "/assets/freelanceflow.webp"
   },
   {
     id: "mkphotography",
@@ -218,7 +228,7 @@ const PROJECTS = [
     gradientClass: "from-zinc-950 via-neutral-900 to-stone-950",
     themeColor: "text-amber-400",
     bulletColor: "text-amber-500",
-    imagePath: "/assets/mk-photography.png"
+    imagePath: "/assets/mk-photography.webp"
   },
   {
     id: "tasveerphotography",
@@ -239,7 +249,7 @@ const PROJECTS = [
     gradientClass: "from-black via-zinc-900 to-stone-900",
     themeColor: "text-gold-400",
     bulletColor: "text-gold-500",
-    imagePath: "/assets/tasveer.png"
+    imagePath: "/assets/tasveer.webp"
   },
   {
     id: "syncflow",
@@ -262,7 +272,6 @@ const PROJECTS = [
     bulletColor: "text-purple-500",
     imagePath: "/assets/Syncflow.png"
   },
-  
   {
     id: "buildwise",
     title: "BuildWise",
@@ -303,31 +312,288 @@ const PROJECTS = [
     gradientClass: "from-purple-950 to-pink-955/40",
     themeColor: "text-emerald-400",
     bulletColor: "text-emerald-500",
-    imagePath: "/assets/web_coustomizer.png"
+    imagePath: "/assets/web_coustomizer.webp"
   }
 ];
+
+type ProjectItem = (typeof PROJECTS)[0];
+
+interface DesktopProjectCardProps {
+  project: ProjectItem;
+  index: number;
+  setCardRef: (index: number, el: HTMLDivElement | null) => void;
+  shouldReduceMotion: boolean | null;
+}
+
+// Memoized desktop project card: isolated from scroll activeIdx changes
+const DesktopProjectCard = React.memo(function DesktopProjectCard({
+  project,
+  index,
+  setCardRef,
+  shouldReduceMotion,
+}: DesktopProjectCardProps) {
+  return (
+    <div
+      ref={(el) => setCardRef(index, el)}
+      data-index={index}
+      className="min-h-screen py-24 flex items-center justify-center relative w-full"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="w-[88%] ml-auto h-[580px]"
+      >
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full h-full block relative"
+        >
+          <div className="w-full h-full cursor-pointer relative group">
+            {/* Dynamic backdrop shadow blur */}
+            <div className="absolute -inset-1 bg-[#182235]/20 rounded-[32px] blur-xl opacity-0 group-hover:opacity-100 transition duration-500" />
+
+            {/* Project Card */}
+            <div className="w-full h-full bg-[#182235] overflow-hidden rounded-[32px] border border-white/10 hover:border-white/20 flex flex-col justify-between relative shadow-2xl p-8 hover:shadow-[#182235]/10 transition-all duration-500">
+              {/* Top Row: Info Title */}
+              <div className="flex justify-between items-start z-10 w-full pointer-events-none">
+                <h4 className="text-white text-xl sm:text-2xl font-bold max-w-[95%] font-sans tracking-tight leading-snug">
+                  {project.subtitle}
+                </h4>
+              </div>
+
+              {/* Center Image Container: Static drop-shadow wrapper on compositing layer */}
+              <div className="flex-1 w-full flex items-center justify-center mt-12 relative rounded-2xl overflow-hidden pointer-events-none group-hover:scale-[1.03] transition-transform duration-500 ease-out origin-bottom">
+                <div className="relative w-full h-full flex items-center justify-center [filter:drop-shadow(0_20px_50px_rgba(0,0,0,0.8))] [transform:translateZ(0)]">
+                  <Image
+                    src={project.imagePath}
+                    alt={project.title}
+                    fill
+                    priority={index === 0}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    sizes="(max-width: 768px) 100vw, 44vw"
+                    className="object-contain p-2"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </motion.div>
+    </div>
+  );
+});
+
+interface MobileProjectCardProps {
+  project: ProjectItem;
+  index: number;
+}
+
+// Memoized mobile project card
+const MobileProjectCard = React.memo(function MobileProjectCard({
+  project,
+  index,
+}: MobileProjectCardProps) {
+  return (
+    <div className="bg-[#182235] p-6 rounded-[24px] border border-white/10 flex flex-col justify-between space-y-4">
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-2xl">💻</span>
+          <div>
+            <span className="text-[10px] font-bold font-mono tracking-widest text-blue-400 block uppercase">
+              {project.subtitle}
+            </span>
+            <h3 className="text-xl font-bold text-white">{project.title}</h3>
+          </div>
+        </div>
+
+        <div className="w-full h-44 rounded-xl overflow-hidden bg-[#131b2d] flex items-center justify-center p-3 my-4 border border-white/10 relative">
+          <Image
+            src={project.imagePath}
+            alt={project.title}
+            fill
+            priority={index === 0}
+            loading={index === 0 ? "eager" : "lazy"}
+            sizes="(max-width: 768px) 90vw, 0vw"
+            className="object-contain rounded-lg p-2"
+          />
+        </div>
+
+        <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+          {project.description}
+        </p>
+
+        <ul className="mt-4 space-y-2 text-[11px] text-zinc-300">
+          {project.bullets.map((bullet, idx) => (
+            <li key={idx} className="flex items-start gap-2">
+              <span className="text-zinc-300 mt-0.5 font-bold font-mono">+</span>
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/10">
+        {project.stack.map((tech) => (
+          <span key={tech} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/40 border border-white/10 text-[10px] font-medium text-white">
+            {getTechIcon(tech)}
+            <span>{tech}</span>
+          </span>
+        ))}
+      </div>
+
+      <a
+        href={project.liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-center text-xs font-bold font-mono flex items-center justify-center gap-1.5 transition-colors"
+      >
+        Visit Project
+        <ArrowUpRight className="w-3.5 h-3.5" />
+      </a>
+    </div>
+  );
+});
+
+interface ProjectDetailItemProps {
+  project: ProjectItem;
+  shouldReduceMotion: boolean | null;
+}
+
+// Memoized detail item with original AnimatePresence springs + dynamic willChange cleanup
+const ProjectDetailItem = React.memo(function ProjectDetailItem({
+  project,
+  shouldReduceMotion,
+}: ProjectDetailItemProps) {
+  const [isAnimating, setIsAnimating] = useState(true);
+
+  return (
+    <motion.div
+      key={project.id}
+      // Enter: glide in from right, fade up smoothly
+      initial={{
+        opacity: 0,
+        x: shouldReduceMotion ? 0 : 48,
+      }}
+      animate={{
+        opacity: 1,
+        x: 0,
+      }}
+      // Exit: glide out to left, fade away at same pace — not rapid
+      exit={{
+        opacity: 0,
+        x: shouldReduceMotion ? 0 : -32,
+        transition: {
+          duration: 0.55,
+          ease: [0.4, 0, 0.6, 1], // smooth ease-in-out, not abrupt
+        },
+      }}
+      transition={{
+        duration: 0.65,
+        ease: [0.22, 1, 0.36, 1], // decelerates gently into rest
+      }}
+      // willChange applied ONLY during active animation, removed on completion
+      style={{ willChange: isAnimating ? "transform, opacity" : "auto" }}
+      onAnimationStart={() => setIsAnimating(true)}
+      onAnimationComplete={() => setIsAnimating(false)}
+      className="space-y-6 flex flex-col items-start justify-center w-full absolute inset-0 px-8 text-left"
+    >
+      {/* Heading marker & Title */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="h-1 w-10 bg-blue-500" />
+        <h3 className="text-3xl font-extrabold text-white font-sans tracking-tight">
+          {project.title}
+        </h3>
+      </div>
+
+      {/* Description */}
+      <p className="text-gray-300 text-lg leading-relaxed mb-6 max-w-2xl">
+        {project.description}
+      </p>
+
+      {/* Technical checklist bullets — staggered rise-in */}
+      <div className="space-y-4 w-full flex flex-col items-start">
+        {project.bullets.map((bullet, idx) => (
+          <motion.div
+            key={idx}
+            initial={{
+              opacity: 0,
+              y: shouldReduceMotion ? 0 : 16,
+            }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.5,
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.1 + idx * 0.055,
+            }}
+            className="flex items-start gap-3"
+          >
+            <span className="text-zinc-300 mt-0.5 font-bold font-mono text-sm">+</span>
+            <p className="text-gray-300 text-base sm:text-lg leading-relaxed">{bullet}</p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Tech stack row — staggered fade-scale in */}
+      <div className="flex flex-wrap justify-start gap-3 mt-10 w-full">
+        {project.stack.map((tech, techIdx) => (
+          <motion.span
+            key={tech}
+            initial={{
+              opacity: 0,
+              y: shouldReduceMotion ? 0 : 10,
+              scale: shouldReduceMotion ? 1 : 0.94,
+            }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              duration: 0.45,
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.15 + techIdx * 0.05,
+            }}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/40 border border-white/10 text-xs font-sans font-medium text-white hover:border-white/20 transition-all duration-300 cursor-default"
+          >
+            {getTechIcon(tech)}
+            <span>{tech}</span>
+          </motion.span>
+        ))}
+      </div>
+    </motion.div>
+  );
+});
 
 export default function Projects() {
   const [activeIdx, setActiveIdx] = useState(0);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // FIX 1: Respect user's prefers-reduced-motion OS setting
+  // Respect user's prefers-reduced-motion OS setting
   const shouldReduceMotion = useReducedMotion();
 
+  const setCardRef = useCallback((index: number, el: HTMLDivElement | null) => {
+    cardRefs.current[index] = el;
+  }, []);
+
   useEffect(() => {
+    // Single IntersectionObserver created once on mount
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const index = Number(entry.target.getAttribute("data-index"));
-            setActiveIdx(index);
+            if (!isNaN(index)) {
+              // startTransition ensures the animated content swap does not block smooth scroll
+              React.startTransition(() => {
+                setActiveIdx((prev) => (prev !== index ? index : prev));
+              });
+            }
           }
         });
       },
       {
         root: null,
         rootMargin: "-30% 0px -30% 0px",
-        threshold: 0.3
+        threshold: 0.3,
       }
     );
 
@@ -365,62 +631,13 @@ export default function Projects() {
             <div className="hidden md:block w-1/2 pr-4">
               <div className="space-y-24">
                 {PROJECTS.map((project, index) => (
-                  <div
+                  <DesktopProjectCard
                     key={project.id}
-                    ref={(el) => { cardRefs.current[index] = el; }}
-                    data-index={index}
-                    className="min-h-screen py-24 flex items-center justify-center relative w-full"
-                  >
-                    <motion.div
-                      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 60 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      // FIX 2: Reduced from 0.65s — still smooth but snappier
-                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                      // FIX 3: will-change only on the element that animates
-                      style={{ willChange: "transform, opacity" }}
-                      className="w-[88%] ml-auto h-[580px]"
-                    >
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full h-full block relative"
-                      >
-                        <div className="w-full h-full cursor-pointer relative group">
-
-                          {/* Dynamic backdrop shadow blur */}
-                          <div className="absolute -inset-1 bg-[#182235]/20 rounded-[32px] blur-xl opacity-0 group-hover:opacity-100 transition duration-500" />
-
-                          {/* Project Card */}
-                          <div className="w-full h-full bg-[#182235] overflow-hidden rounded-[32px] border border-white/10 hover:border-white/20 flex flex-col justify-between relative shadow-2xl p-8 hover:shadow-[#182235]/10 transition-all duration-500">
-
-                            {/* Top Row: Info Title */}
-                            <div className="flex justify-between items-start z-10 w-full pointer-events-none">
-                              <h4 className="text-white text-xl sm:text-2xl font-bold max-w-[95%] font-sans tracking-tight leading-snug">
-                                {project.subtitle}
-                              </h4>
-                            </div>
-
-                            {/* FIX 4: next/image instead of <img> — lazy by default, auto WebP, no layout shift */}
-                            <div className="flex-1 w-full flex items-center justify-center mt-12 relative rounded-2xl overflow-hidden pointer-events-none group-hover:scale-[1.03] transition-transform duration-500 ease-out origin-bottom">
-                              <Image
-                                src={project.imagePath}
-                                alt={project.title}
-                                fill
-                                // FIX 5: First project is above the fold — priority loads it eagerly (LCP fix)
-                                // All others are lazy-loaded automatically
-                                priority={index === 0}
-                                sizes="(max-width: 768px) 100vw, 44vw"
-                                className="object-contain p-2 drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-                              />
-                            </div>
-
-                          </div>
-                        </div>
-                      </a>
-                    </motion.div>
-                  </div>
+                    project={project}
+                    index={index}
+                    setCardRef={setCardRef}
+                    shouldReduceMotion={shouldReduceMotion}
+                  />
                 ))}
               </div>
             </div>
@@ -429,67 +646,11 @@ export default function Projects() {
             <div className="w-full md:hidden pr-0 relative">
               <div className="space-y-8 my-8">
                 {PROJECTS.map((project, index) => (
-                  <div
+                  <MobileProjectCard
                     key={project.id}
-                    className="bg-[#182235] p-6 rounded-[24px] border border-white/10 flex flex-col justify-between space-y-4"
-                  >
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-2xl">💻</span>
-                        <div>
-                          <span className="text-[10px] font-bold font-mono tracking-widest text-blue-400 block uppercase">
-                            {project.subtitle}
-                          </span>
-                          <h3 className="text-xl font-bold text-white">{project.title}</h3>
-                        </div>
-                      </div>
-
-                      {/* FIX 4 (mobile): next/image here too */}
-                      <div className="w-full h-44 rounded-xl overflow-hidden bg-[#131b2d] flex items-center justify-center p-3 my-4 border border-white/10 relative">
-                        <Image
-                          src={project.imagePath}
-                          alt={project.title}
-                          fill
-                          // FIX 5 (mobile): only eager-load the first card
-                          priority={index === 0}
-                          sizes="(max-width: 768px) 90vw, 0vw"
-                          className="object-contain rounded-lg p-2"
-                        />
-                      </div>
-
-                      <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                        {project.description}
-                      </p>
-
-                      <ul className="mt-4 space-y-2 text-[11px] text-zinc-300">
-                        {project.bullets.map((bullet, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <span className="text-zinc-300 mt-0.5 font-bold font-mono">+</span>
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/10">
-                      {project.stack.map((tech) => (
-                        <span key={tech} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/40 border border-white/10 text-[10px] font-medium text-white">
-                          {getTechIcon(tech)}
-                          <span>{tech}</span>
-                        </span>
-                      ))}
-                    </div>
-
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-center text-xs font-bold font-mono flex items-center justify-center gap-1.5 transition-colors"
-                    >
-                      Visit Project
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
+                    project={project}
+                    index={index}
+                  />
                 ))}
               </div>
             </div>
@@ -499,99 +660,13 @@ export default function Projects() {
               <div className="sticky top-0 h-screen flex flex-col justify-center items-start">
                 <div className="h-[520px] flex flex-col justify-center items-start max-w-2xl w-full px-8 text-left relative">
                   <AnimatePresence mode="wait">
-                    {PROJECTS.map((project, index) => {
-                      if (index !== activeIdx) return null;
-                      return (
-                        <motion.div
-                          key={project.id}
-                          // Enter: glide in from right, fade up smoothly
-                          initial={{
-                            opacity: 0,
-                            x: shouldReduceMotion ? 0 : 48,
-                          }}
-                          animate={{
-                            opacity: 1,
-                            x: 0,
-                          }}
-                          // Exit: glide out to left, fade away at same pace — not rapid
-                          exit={{
-                            opacity: 0,
-                            x: shouldReduceMotion ? 0 : -32,
-                            transition: {
-                              duration: 0.55,
-                              ease: [0.4, 0, 0.6, 1], // smooth ease-in-out, not abrupt
-                            },
-                          }}
-                          transition={{
-                            duration: 0.65,
-                            ease: [0.22, 1, 0.36, 1], // decelerates gently into rest
-                          }}
-                          style={{ willChange: "transform, opacity" }}
-                          className="space-y-6 flex flex-col items-start justify-center w-full absolute inset-0 px-8 text-left"
-                        >
-                          {/* Heading marker & Title */}
-                          <div className="flex items-center gap-3 mb-4">
-                            <div className="h-1 w-10 bg-blue-500" />
-                            <h3 className="text-3xl font-extrabold text-white font-sans tracking-tight">
-                              {project.title}
-                            </h3>
-                          </div>
-
-                          {/* Description */}
-                          <p className="text-gray-300 text-lg leading-relaxed mb-6 max-w-2xl">
-                            {project.description}
-                          </p>
-
-                          {/* Technical checklist bullets — staggered rise-in */}
-                          <div className="space-y-4 w-full flex flex-col items-start">
-                            {project.bullets.map((bullet, idx) => (
-                              <motion.div
-                                key={idx}
-                                initial={{
-                                  opacity: 0,
-                                  y: shouldReduceMotion ? 0 : 16,
-                                }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{
-                                  duration: 0.5,
-                                  ease: [0.22, 1, 0.36, 1],
-                                  delay: 0.1 + idx * 0.055,
-                                }}
-                                className="flex items-start gap-3"
-                              >
-                                <span className="text-zinc-300 mt-0.5 font-bold font-mono text-sm">+</span>
-                                <p className="text-gray-300 text-base sm:text-lg leading-relaxed">{bullet}</p>
-                              </motion.div>
-                            ))}
-                          </div>
-
-                          {/* Tech stack row — staggered fade-scale in */}
-                          <div className="flex flex-wrap justify-start gap-3 mt-10 w-full">
-                            {project.stack.map((tech, techIdx) => (
-                              <motion.span
-                                key={tech}
-                                initial={{
-                                  opacity: 0,
-                                  y: shouldReduceMotion ? 0 : 10,
-                                  scale: shouldReduceMotion ? 1 : 0.94,
-                                }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                transition={{
-                                  duration: 0.45,
-                                  ease: [0.22, 1, 0.36, 1],
-                                  delay: 0.15 + techIdx * 0.05,
-                                }}
-                                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/40 border border-white/10 text-xs font-sans font-medium text-white hover:border-white/20 transition-all duration-300 cursor-default"
-                              >
-                                {getTechIcon(tech)}
-                                <span>{tech}</span>
-                              </motion.span>
-                            ))}
-                          </div>
-
-                        </motion.div>
-                      );
-                    })}
+                    {PROJECTS[activeIdx] && (
+                      <ProjectDetailItem
+                        key={PROJECTS[activeIdx].id}
+                        project={PROJECTS[activeIdx]}
+                        shouldReduceMotion={shouldReduceMotion}
+                      />
+                    )}
                   </AnimatePresence>
                 </div>
               </div>

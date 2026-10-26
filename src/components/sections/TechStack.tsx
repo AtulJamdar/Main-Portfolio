@@ -91,7 +91,7 @@ const TechPill = memo(function TechPill({
           ? { borderColor: "#a855f7", backgroundColor: "rgba(147, 51, 234, 0.1)" }
           : { scale: 1.05, borderColor: "#a855f7", backgroundColor: "rgba(147, 51, 234, 0.1)" }
       }
-      className="rounded-full py-1.5 sm:py-2 px-3 sm:px-4 flex items-center justify-center gap-1.5 sm:gap-2 border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm transition-colors duration-300 cursor-default shadow-md"
+      className="rounded-full py-1.5 sm:py-2 px-3 sm:px-4 flex items-center justify-center gap-1.5 sm:gap-2 border border-zinc-800 bg-zinc-900/80 transition-colors duration-300 cursor-default shadow-md"
     >
       <span className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
         {/* FIX 4: External CDN icons — next/image requires domain allowlist so
@@ -163,7 +163,7 @@ export default function TechStack() {
             </div>
 
             {/* Typography */}
-            <div className="relative pt-4 sm:pt-6 backdrop-blur-xs mt-24 sm:mt-32 z-10 text-center">
+            <div className="relative pt-4 sm:pt-6 mt-24 sm:mt-32 z-10 text-center">
               <p className="text-[10px] sm:text-xs uppercase tracking-widest text-zinc-500 font-mono mb-2">
                 Better than yesterday.
               </p>
